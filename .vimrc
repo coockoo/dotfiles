@@ -12,7 +12,7 @@ set backspace=indent,eol,start
 set ruler
 
 " Show tabs, trailing spaces, endofilnes in by pressing F2
-nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
+nnoremap <F2> :<C-U>setlocal lcs=tab:>-,space:.,trail:-,eol:$ list! list? <CR>
 
 " Set encoding to utf-8
 scriptencoding utf-8
@@ -91,9 +91,16 @@ hi ColorColumn ctermbg=7 guibg=#666666
 
 " ALE settings
 let g:ale_linters = {'javascript': ['eslint'], 'typescript': ['tslint']}
-let g:ale_fixers = {'javascript': ['eslint'], 'typescript': ['tslint']}
+let g:ale_fixers = {
+      \ 'javascript': ['prettier'],
+      \ 'javascript.jsx': ['prettier'],
+      \ 'typescript': ['tslint'],
+      \ 'css': ['prettier'],
+      \ 'less': ['prettier']
+      \ }
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 1
 let g:ale_lint_on_enter = 0
 let g:ale_set_highlights = 0
 
