@@ -38,6 +38,9 @@ let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsEditSplit="vertical"
 
+" Disable <C-c> for SQL files and replace it with C-j
+let g:ftplugin_sql_omni_key = '<C-j>'
+
 " NERDComment
 let g:NERDComToggleComment = '<C-/>'
 
@@ -46,9 +49,6 @@ let g:NERDTreeCascadeSingleChildDir = 0
 " Reveal current file in tree
 nmap ,r :NERDTreeFind<CR>
 
-
-" JSX 
-let g:jsx_ext_required = 0
 
 " Neocomplete
 let g:neocomplete#enable_at_startup = 1
@@ -90,11 +90,11 @@ set colorcolumn=120
 hi ColorColumn ctermbg=7 guibg=#666666
 
 " ALE settings
-let g:ale_linters = {'javascript': ['eslint'], 'typescript': ['tslint']}
+let g:ale_linters = {'javascript': ['eslint'], 'typescript': ['eslint']}
 let g:ale_fixers = {
       \ 'javascript': ['prettier'],
       \ 'javascript.jsx': ['prettier'],
-      \ 'typescript': ['tslint'],
+      \ 'typescript': ['eslint'],
       \ 'css': ['prettier'],
       \ 'less': ['prettier']
       \ }
@@ -103,6 +103,7 @@ let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_enter = 0
 let g:ale_set_highlights = 0
+let g:ale_typescript_tslint_use_global = 0
 
 " Setup command aliases
 " https://stackoverflow.com/a/3879737/1162326
