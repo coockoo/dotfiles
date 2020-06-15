@@ -1,0 +1,31 @@
+[core]
+  excludesfile = $HOME/.gitignore_global
+  pager = diff-so-fancy | less --tabs=4 -RFX
+  editor = vim
+  ignorecase = false
+[user]
+  email = alex.coockoo@gmail.com
+  name = Oleksandr Bondarchuk
+[push]
+  default = current
+[alias]
+  lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+  lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+  lg = !"git lg1"
+
+  # List tags (in order)
+  tg = tag --sort=v:refname
+
+  # typos
+  statsu = status
+  comit = commit
+
+  # shortcuts
+  s = status
+  d = diff
+  dc = diff --cached
+  cc = rev-list HEAD --count
+  pr = pull --rebase
+  pfl = push --force-with-lease
+
+  cleanup = !"git branch --merged | egrep -v '^(\\*.+|(\\s+master)?)$' | xargs git branch -d && git remote prune origin"
