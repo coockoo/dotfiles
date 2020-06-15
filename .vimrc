@@ -85,18 +85,24 @@ set statusline+=%4l             " Current line
 set statusline+=/               " Separator
 set statusline+=%L              " Total lines
 
-" Vertical line for 120 symbols
-set colorcolumn=120
+" Vertical line for 100 symbols
+set colorcolumn=100
 hi ColorColumn ctermbg=7 guibg=#666666
 
 " ALE settings
-let g:ale_linters = {'javascript': ['eslint'], 'typescript': ['eslint']}
+let g:ale_linters = {
+  \ 'javascript': ['eslint'],
+  \ 'typescript': ['eslint']
+  \ }
 let g:ale_fixers = {
       \ 'javascript': ['prettier'],
       \ 'javascript.jsx': ['prettier'],
-      \ 'typescript': ['eslint'],
+      \ 'json': ['prettier'],
+      \ 'typescript': ['prettier'],
       \ 'css': ['prettier'],
-      \ 'less': ['prettier']
+      \ 'less': ['prettier'],
+      \ 'html': [],
+      \ 'sql': []
       \ }
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
@@ -104,6 +110,9 @@ let g:ale_fix_on_save = 1
 let g:ale_lint_on_enter = 0
 let g:ale_set_highlights = 0
 let g:ale_typescript_tslint_use_global = 0
+let g:ale_typescript_eslint_use_global = 0
+let g:ale_typescript_eslint_options = '--cache'
+" let g:ale_sql_pgformatter_options = '--function-case 1 --keyword-case 1 --spaces 2'
 
 " Setup command aliases
 " https://stackoverflow.com/a/3879737/1162326
@@ -115,3 +124,6 @@ endfun
 call SetupCommandAlias("W","w")
 call SetupCommandAlias("Tabm","tabm")
 call SetupCommandAlias("Tabo","tabo")
+
+" Use fzf
+set rtp+=/usr/local/opt/fzf
