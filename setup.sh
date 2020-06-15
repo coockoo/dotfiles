@@ -108,6 +108,34 @@ else
   echo "the_silver_searcher is already installed"
 fi
 
+# Z - jump around
+echo "Installing z - jump around..."
+if [ "$(command -v _z)" != '_z' ]; then
+  brew install z
+  echo "Successfully installed z - jump around"
+else
+  echo "z - jump around is already installed"
+fi
+
+# FZF
+echo "Installing fzf..."
+if ! [ -x "$(command -v fzf)" ]; then
+  brew install fzf
+  $(brew --prefix)/opt/fzf/install
+  echo "Successfully installed fzf"
+else
+  echo "fzf is already installed"
+fi
+
+# Install nvm
+echo "Installing nvm..."
+if ! [ -f "$HOME/.nvm/nvm.sh" ]; then
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh
+  echo "Successfully installed nvm"
+else
+  echo "nvm is already installed"
+fi
+
 # Link config and startup files
 echo "Linkind config and startup files..."
 
