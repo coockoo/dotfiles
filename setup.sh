@@ -21,6 +21,15 @@ else
   echo "oh-my-zsh is already installed"
 fi
 
+# Install custom oh-my-zsh theme
+echo "Installing oh-my-zsh theme..."
+if ! [ -d "$HOME/.oh-my-zsh/custom/themes/coockoo.zsh-theme" ]; then
+  ln oh-my-zsh/custom/themes/coockoo.zsh-theme "$HOME/.oh-my-zsh/custom/themes/coockoo.zsh-theme"
+  echo "Successfully installed oh-my-zsh theme"
+else
+  echo "oh-my-zsh theme is already installed"
+fi
+
 # Install Vim
 echo "Installing Vim from brew..."
 brew list vim || brew install vim
@@ -88,6 +97,15 @@ if ! [ -d "$HOME/.vim/bundle/vim-nerdtree-tabs" ]; then
   echo "Successfully installed vim-nerdtree-tabs"
 else
   echo "vim-nerdtree-tabs is already installed"
+fi
+
+# The Silver Searcher
+echo "Installing the_silver_searcher..."
+if ! [ -x "$(command -v ag)" ]; then
+  brew install the_silver_searcher
+  echo "Successfully installed the_silver_searcher"
+else
+  echo "the_silver_searcher is already installed"
 fi
 
 # Link config and startup files
