@@ -3,6 +3,7 @@
 # Set zsh as default shell
 EXPECTED_SHELL="/bin/zsh"
 
+# Set default shell to zsh
 echo "Setting default shell to zsh..."
 if ! [ "$SHELL" == "$EXPECTED_SHELL" ]; then
   chsh -s /bin/zsh
@@ -11,6 +12,7 @@ else
   echo "zsh is already a default shell"
 fi
 
+# Install oh-my-zsh
 echo "Installing oh-my-zsh..."
 if ! [ -d "$HOME/.oh-my-zsh" ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -19,6 +21,12 @@ else
   echo "oh-my-zsh is already installed"
 fi
 
+# Install Vim
+echo "Installing Vim from brew..."
+brew list vim || brew install vim
+echo "Successfully installed Vim"
+
+# Install diff-so-fancy
 echo "Installing diff-so-fancy..."
 if ! [ -x "$(command -v diff-so-fancy)" ]; then
   brew install diff-so-fancy
@@ -42,6 +50,7 @@ else
   echo "Pathogen is alredy installed"
 fi
 
+# Setup Vim colorscheme
 echo "Linking color scheme"
 if ! [ -f "$HOME/.vim/colors/custom.vim" ]; then
   mkdir -p "$HOME/.vim/colors"
@@ -51,6 +60,37 @@ else
   echo "Vim colors successfully linked"
 fi
 
+# Install Vim dependencies
+echo "Installing Vim dependencies..."
+
+# Neocomplete
+echo "Installing neocomplete.vim..."
+if ! [ -d "$HOME/.vim/bundle/neocomplete.vim" ]; then
+  git clone https://github.com/shougo/neocomplete.vim "$HOME/.vim/bundle/neocomplete.vim"
+  echo "Successfully installed neocomplete.vim"
+else
+  echo "neocomplete.vim is already installed"
+fi
+
+# NERDTree
+echo "Installing nerdtree"
+if ! [ -d "$HOME/.vim/bundle/nerdtree" ]; then
+  git clone https://github.com/scrooloose/nerdtree "$HOME/.vim/bundle/nerdtree"
+  echo "Successfully installed nerdtree"
+else
+  echo "nerdtree is already installed"
+fi
+
+# NERDTree tabs
+echo "Installing vim-nerdtree-tabs"
+if ! [ -d "$HOME/.vim/bundle/vim-nerdtree-tabs" ]; then
+  git clone https://github.com/jistr/vim-nerdtree-tabs "$HOME/.vim/bundle/vim-nerdtree-tabs"
+  echo "Successfully installed vim-nerdtree-tabs"
+else
+  echo "vim-nerdtree-tabs is already installed"
+fi
+
+# Link config and startup files
 echo "Linkind config and startup files..."
 
 echo "Linking .zshrc..."
