@@ -23,7 +23,7 @@ fi
 
 # Install custom oh-my-zsh theme
 echo "Installing oh-my-zsh theme..."
-if ! [ -d "$HOME/.oh-my-zsh/custom/themes/coockoo.zsh-theme" ]; then
+if ! [ -f "$HOME/.oh-my-zsh/custom/themes/coockoo.zsh-theme" ]; then
   ln oh-my-zsh/custom/themes/coockoo.zsh-theme "$HOME/.oh-my-zsh/custom/themes/coockoo.zsh-theme"
   echo "Successfully installed oh-my-zsh theme"
 else
