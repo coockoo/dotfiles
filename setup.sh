@@ -99,6 +99,15 @@ else
   echo "vim-nerdtree-tabs is already installed"
 fi
 
+# ale
+echo "Installing ale..."
+if ! [ -d "$HOME/.vim/bundle/ale" ]; then
+  git clone https://github.com/dense-analysis/ale "$HOME/.vim/bundle/ale"
+  echo "Successfully installed ale"
+else
+  echo "ale is already installed"
+fi
+
 # The Silver Searcher
 echo "Installing the_silver_searcher..."
 if ! [ -x "$(command -v ag)" ]; then
