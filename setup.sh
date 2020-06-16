@@ -108,6 +108,18 @@ else
   echo "ale is already installed"
 fi
 
+# UltiSnips
+echo "Installing UltiSnips..."
+if ! [ -d "$HOME/.vim/bundle/ultisnips" ]; then
+  git clone https://github.com/SirVer/ultisnips "$HOME/.vim/bundle/ultisnips"
+  ln vim/UltiSnips "$HOME/.vim/UltiSnips"
+  echo "Successfully installed ulti snips"
+else
+  echo "UltiSnips is already installed"
+fi
+
+
+
 # The Silver Searcher
 echo "Installing the_silver_searcher..."
 if ! [ -x "$(command -v ag)" ]; then
