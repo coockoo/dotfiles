@@ -113,10 +113,29 @@ echo "Installing UltiSnips..."
 if ! [ -d "$HOME/.vim/bundle/ultisnips" ]; then
   git clone https://github.com/SirVer/ultisnips "$HOME/.vim/bundle/ultisnips"
   ln vim/UltiSnips "$HOME/.vim/UltiSnips"
-  echo "Successfully installed ulti snips"
+  echo "Successfully installed UltiSnips"
 else
   echo "UltiSnips is already installed"
 fi
+
+# ctrlp.vim
+echo "Installing ctrlp.vim..."
+if ! [ -d "$HOME/.vim/bundle/ctrlp.vim" ]; then
+  git clone https://github.com/ctrlpvim/ctrlp.vim "$HOME/.vim/bundle/ctrlp.vim"
+  echo "Successfully installed ctrlp.vim"
+else
+  echo "ctrlp.vim is already installed"
+fi
+
+# emmet-vim
+echo "Installing emmet-vim..."
+if ! [ -d "$HOME/.vim/bundle/emmet-vim" ]; then
+  git clone https://github.com/mattn/emmet-vim.git "$HOME/.vim/bundle/emmet-vim"
+  echo "Successfully installed emmet-vim"
+else
+  echo "emmet-vim is already installed"
+fi
+
 
 
 
