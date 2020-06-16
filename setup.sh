@@ -35,29 +35,15 @@ echo "Installing Vim from brew..."
 brew list vim || brew install vim
 echo "Successfully installed Vim"
 
-# Install diff-so-fancy
-echo "Installing diff-so-fancy..."
-if ! [ -x "$(command -v diff-so-fancy)" ]; then
-  brew install diff-so-fancy
-  echo "Successfully installed diff-so-fancy"
-else
-  echo "diff-so-fancy is already installed"
+echo "Linking .vimrc..."
+if ! [ -f "$HOME/.vimrc" ]; then
+  ln .vimrc "$HOME/.vimrc"
 fi
 
 # Create directory for Vim
 echo "Creating directory for Vim..."
-mkdir -p $HOME/.vim
+mkdir -p $HOME/.vim/bundle
 echo "Directory for Vim created"
-
-# Install Pathogen for Vim
-echo "Installing pathogen for Vim..."
-if ! [ -f "$HOME/.vim/autoload/pathogen.vim" ]; then
-  mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && \
-  curl -LSso "$HOME/.vim/autoload/pathogen.vim" https://tpo.pe/pathogen.vim
-  echo "Pathogen successfully installed"
-else
-  echo "Pathogen is alredy installed"
-fi
 
 # Setup Vim colorscheme
 echo "Linking color scheme"
@@ -69,75 +55,24 @@ else
   echo "Vim colors successfully linked"
 fi
 
-# Install Vim dependencies
-echo "Installing Vim dependencies..."
-
-# Neocomplete
-echo "Installing neocomplete.vim..."
-if ! [ -d "$HOME/.vim/bundle/neocomplete.vim" ]; then
-  git clone https://github.com/shougo/neocomplete.vim "$HOME/.vim/bundle/neocomplete.vim"
-  echo "Successfully installed neocomplete.vim"
+# Install Vundle for Vim
+echo "Installing Vundle for Vim..."
+if ! [ -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+  git clone https://github.com/VundleVim/Vundle.vim "$HOME/.vim/bundle/Vundle.vim"
+  vim +PluginInstall +qall
+  echo "Vundle successfully installed"
 else
-  echo "neocomplete.vim is already installed"
+  echo "Vundle is alredy installed"
 fi
 
-# NERDTree
-echo "Installing nerdtree"
-if ! [ -d "$HOME/.vim/bundle/nerdtree" ]; then
-  git clone https://github.com/scrooloose/nerdtree "$HOME/.vim/bundle/nerdtree"
-  echo "Successfully installed nerdtree"
+# Install diff-so-fancy
+echo "Installing diff-so-fancy..."
+if ! [ -x "$(command -v diff-so-fancy)" ]; then
+  brew install diff-so-fancy
+  echo "Successfully installed diff-so-fancy"
 else
-  echo "nerdtree is already installed"
+  echo "diff-so-fancy is already installed"
 fi
-
-# NERDTree tabs
-echo "Installing vim-nerdtree-tabs"
-if ! [ -d "$HOME/.vim/bundle/vim-nerdtree-tabs" ]; then
-  git clone https://github.com/jistr/vim-nerdtree-tabs "$HOME/.vim/bundle/vim-nerdtree-tabs"
-  echo "Successfully installed vim-nerdtree-tabs"
-else
-  echo "vim-nerdtree-tabs is already installed"
-fi
-
-# ale
-echo "Installing ale..."
-if ! [ -d "$HOME/.vim/bundle/ale" ]; then
-  git clone https://github.com/dense-analysis/ale "$HOME/.vim/bundle/ale"
-  echo "Successfully installed ale"
-else
-  echo "ale is already installed"
-fi
-
-# UltiSnips
-echo "Installing UltiSnips..."
-if ! [ -d "$HOME/.vim/bundle/ultisnips" ]; then
-  git clone https://github.com/SirVer/ultisnips "$HOME/.vim/bundle/ultisnips"
-  ln vim/UltiSnips "$HOME/.vim/UltiSnips"
-  echo "Successfully installed UltiSnips"
-else
-  echo "UltiSnips is already installed"
-fi
-
-# ctrlp.vim
-echo "Installing ctrlp.vim..."
-if ! [ -d "$HOME/.vim/bundle/ctrlp.vim" ]; then
-  git clone https://github.com/ctrlpvim/ctrlp.vim "$HOME/.vim/bundle/ctrlp.vim"
-  echo "Successfully installed ctrlp.vim"
-else
-  echo "ctrlp.vim is already installed"
-fi
-
-# emmet-vim
-echo "Installing emmet-vim..."
-if ! [ -d "$HOME/.vim/bundle/emmet-vim" ]; then
-  git clone https://github.com/mattn/emmet-vim.git "$HOME/.vim/bundle/emmet-vim"
-  echo "Successfully installed emmet-vim"
-else
-  echo "emmet-vim is already installed"
-fi
-
-
-
 
 # The Silver Searcher
 echo "Installing the_silver_searcher..."
@@ -187,11 +122,6 @@ fi
 echo "Linking .zprofile..."
 if ! [ -f "$HOME/.zprofile" ]; then
   ln .zprofile "$HOME/.zprofile"
-fi
-
-echo "Linking .vimrc..."
-if ! [ -f "$HOME/.vimrc" ]; then
-  ln .vimrc "$HOME/.vimrc"
 fi
 
 echo "Linking .gitconfig..."

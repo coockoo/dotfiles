@@ -2,4 +2,4 @@
 
 ## TODO
 
-- [ ] Replace pathogen with Vundle
+- [x] Replace pathogen with Vundle

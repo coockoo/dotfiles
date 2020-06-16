@@ -1,7 +1,37 @@
-execute pathogen#infect()
-syntax on
+" Use Vundle
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+
+" Let Vundle manage itself
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'dense-analysis/ale'
+Plugin 'hail2u/vim-css3-syntax'
+" Plugin 'juleswang/css.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'shougo/neocomplete.vim'
+Plugin 'preservim/nerdtree'
+Plugin 'chr4/nginx.vim'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'jparise/vim-graphql'
+Plugin 'pangloss/vim-javascript'
+Plugin 'maxmellon/vim-jsx-pretty'
+Plugin 'groenewege/vim-less'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'stephpy/vim-yaml'
+
+call vundle#end()
+
 filetype plugin indent on
-let g:nerdtree_tabs_open_on_console_startup=1
+
+syntax on
+
 set nowrap
 set number
 set tabstop=2
@@ -18,6 +48,7 @@ nnoremap <F2> :<C-U>setlocal lcs=tab:>-,space:.,trail:-,eol:$ list! list? <CR>
 scriptencoding utf-8
 set encoding=utf-8
 
+" Ctrl-P
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_map = '<C-O>'
@@ -48,7 +79,7 @@ let g:NERDComToggleComment = '<C-/>'
 let g:NERDTreeCascadeSingleChildDir = 0
 " Reveal current file in tree
 nmap ,r :NERDTreeFind<CR>
-
+let g:nerdtree_tabs_open_on_console_startup=1
 
 " Neocomplete
 let g:neocomplete#enable_at_startup = 1
