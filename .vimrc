@@ -40,6 +40,8 @@ set shiftwidth=2
 set expandtab
 set backspace=indent,eol,start
 set ruler
+" default updatetime 4000ms is not good for async update
+set updatetime=100
 
 " Show tabs, trailing spaces, endofilnes in by pressing F2
 nnoremap <F2> :<C-U>setlocal lcs=tab:>-,space:.,trail:-,eol:$ list! list? <CR>
