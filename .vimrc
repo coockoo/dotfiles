@@ -13,7 +13,7 @@ Plugin 'hail2u/vim-css3-syntax'
 " Plugin 'juleswang/css.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
-Plugin 'shougo/neocomplete.vim'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'preservim/nerdtree'
 Plugin 'chr4/nginx.vim'
 Plugin 'leafgarland/typescript-vim'
@@ -32,6 +32,10 @@ filetype plugin indent on
 
 syntax on
 
+set hidden
+set nobackup
+set nowritebackup
+set cmdheight=2
 set nowrap
 set number
 set tabstop=2
@@ -83,17 +87,24 @@ let g:NERDTreeCascadeSingleChildDir = 0
 nmap ,r :NERDTreeFind<CR>
 let g:nerdtree_tabs_open_on_console_startup=1
 
-" Neocomplete
-let g:neocomplete#enable_at_startup = 1
-autocmd VimEnter * NeoCompleteEnable " Enable NeoComplete at startup
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<TAB>" :
-			\ neocomplete#start_manual_complete()
-function! s:check_back_space() "{{{
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
+" coc.nvim
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+let g:coc_global_extensions = [ 'coc-tsserver' ]
 
 " Colorscheme
 let g:rehash256=1
@@ -128,23 +139,26 @@ let g:ale_linters = {
   \ 'typescript': ['eslint']
   \ }
 let g:ale_fixers = {
-      \ 'javascript': ['prettier'],
-      \ 'javascript.jsx': ['prettier'],
-      \ 'json': ['prettier'],
-      \ 'typescript': ['prettier'],
-      \ 'css': ['prettier'],
-      \ 'less': ['prettier'],
-      \ 'html': [],
-      \ 'sql': []
-      \ }
+  \ 'javascript': ['prettier'],
+  \ 'javascript.jsx': ['prettier'],
+  \ 'json': ['prettier'],
+  \ 'typescript': ['prettier'],
+  \ 'typescriptreact': ['prettier'],
+  \ 'css': ['prettier'],
+  \ 'less': ['prettier'],
+  \ 'html': [],
+  \ 'sql': []
+  \ }
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
-let g:ale_lint_on_enter = 0
+let g:ale_lint_on_enter = 1
 let g:ale_set_highlights = 0
 let g:ale_typescript_tslint_use_global = 0
 let g:ale_typescript_eslint_use_global = 0
 let g:ale_typescript_eslint_options = '--cache'
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '>>'
 " let g:ale_sql_pgformatter_options = '--function-case 1 --keyword-case 1 --spaces 2'
 
 " Setup command aliases
