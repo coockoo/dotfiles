@@ -21,11 +21,12 @@
   comit = commit
 
   # shortcuts
-  s = status
+  cc = rev-list HEAD --count
+  co = checkout
   d = diff
   dc = diff --cached
-  cc = rev-list HEAD --count
-  pr = pull --rebase
   pfl = push --force-with-lease
+  pr = pull --rebase
+  s = status
 
   cleanup = !"git branch --merged | egrep -v '^(\\*.+|(\\s+master)?)$' | xargs git branch -d && git remote prune origin"
