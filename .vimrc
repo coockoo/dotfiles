@@ -25,6 +25,7 @@ Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'groenewege/vim-less'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'stephpy/vim-yaml'
+Plugin 'itchyny/vim-gitbranch'
 
 call vundle#end()
 
@@ -35,7 +36,7 @@ syntax on
 set hidden
 set nobackup
 set nowritebackup
-set cmdheight=2
+set cmdheight=1
 set nowrap
 set number
 set tabstop=2
@@ -46,6 +47,8 @@ set backspace=indent,eol,start
 set ruler
 " default updatetime 4000ms is not good for async update
 set updatetime=100
+" Hide mode at the bottom
+set noshowmode
 
 " Show tabs, trailing spaces, endofilnes in by pressing F2
 nnoremap <F2> :<C-U>setlocal lcs=tab:>-,space:.,trail:-,eol:$ list! list? <CR>
@@ -119,15 +122,22 @@ function! SyntaxItem()
 	return synIDattr(synID(line("."),col("."),1),"name")
 endfunction
 
+let s:mode_map = {
+\   'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL', 'V': 'V-LINE', "\<C-v>": 'V-BLOCK',
+\   'c': 'COMMAND', 's': 'SELECT', 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', 't': 'TERMINAL'
+\ }
+
+function! GetMode() abort
+  return get(s:mode_map, mode(), '')
+endfunction
+
 " Statusline configuration
-set statusline=%f               " Filename
-set statusline+=\ -\            " Separator
-set statusline+=%y              " Filetype
-set statusline+=%=              " Switch to the right side
-set statusline+=%{SyntaxItem()} " Display word group (for syntax)
-set statusline+=%4l             " Current line
-set statusline+=/               " Separator
-set statusline+=%L              " Total lines
+set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineDefault#\  " Mode
+set statusline+=%f\                                                    " Filename + separator
+set statusline+=%y\                                                    " Filetype + separator
+set statusline+=%=                                                     " Switch to the right side
+set statusline+=%{SyntaxItem()}\                                       " Display word group (for syntax)
+set statusline+=%#StatusLineGitBranch#\ %{gitbranch#name()}\           " Git branch
 
 " Vertical line for 100 symbols
 set colorcolumn=100

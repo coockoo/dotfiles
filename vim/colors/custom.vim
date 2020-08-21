@@ -98,3 +98,8 @@ hi CocErrorSign   ctermfg=1  ctermbg=NONE
 hi CocWarningSign ctermfg=11 ctermbg=NONE
 hi CocInfoSign    ctermfg=4  ctermbg=NONE
 hi CocHintSign    ctermfg=12 ctermbg=NONE
+
+" Custom StatusLine colors
+hi StatusLineDefault ctermbg=15 ctermfg=16
+hi StatusLineMode ctermbg=2 ctermfg=15 cterm=bold
+hi StatusLineGitBranch ctermbg=6 ctermfg=15 cterm=bold
