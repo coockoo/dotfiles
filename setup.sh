@@ -52,7 +52,7 @@ if ! [ -f "$HOME/.vim/colors/custom.vim" ]; then
   ln vim/colors/custom.vim "$HOME/.vim/colors/custom.vim"
   echo "Successfully linked vim colors"
 else
-  echo "Vim colors successfully linked"
+  echo "Vim colors already linked"
 fi
 
 # Install Vundle for Vim
@@ -63,6 +63,15 @@ if ! [ -d "$HOME/.vim/bundle/Vundle.vim" ]; then
   echo "Vundle successfully installed"
 else
   echo "Vundle is alredy installed"
+fi
+
+# Link coc-settings.json
+echo "Linking coc-settings.json..."
+if ! [ -f "$HOME/.vim/coc-settings.json" ]; then
+  ln vim/coc-settings.json "$HOME/.vim/coc-settings.json"
+  echo "Successfully linked coc-settings.json"
+else
+  echo "Already linked coc-settings.json"
 fi
 
 # Override Vim NERDTree mapping
