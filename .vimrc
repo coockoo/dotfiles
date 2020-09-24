@@ -89,6 +89,7 @@ let g:NERDTreeCascadeSingleChildDir = 0
 " Reveal current file in tree
 nmap ,r :NERDTreeFind<CR>
 let g:nerdtree_tabs_open_on_console_startup=1
+let g:NERDTreeIgnore = ['\.swp$', '^.DS_Store$']
 
 " coc.nvim
 " Use tab for trigger completion with characters ahead and navigate.
