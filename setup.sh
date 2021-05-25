@@ -74,16 +74,6 @@ else
   echo "Already linked coc-settings.json"
 fi
 
-# Override Vim NERDTree mapping
-echo "Overriding NERDTree mapping..."
-if ! [ -f "$HOME/.vim/plugin/override_nerdtree_tab_mapping.vim" ]; then
-  mkdir -p "$HOME/.vim/plugin"
-  ln vim/plugin/override_nerdtree_tab_mapping.vim "$HOME/.vim/plugin/override_nerdtree_tab_mapping.vim"
-  echo "Successfully overriden mapping..."
-else
-  echo "Mapping is already overriden"
-fi
-
 # Install diff-so-fancy
 echo "Installing diff-so-fancy..."
 if ! [ -x "$(command -v diff-so-fancy)" ]; then
