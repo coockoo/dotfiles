@@ -1,5 +1,5 @@
 [core]
-  excludesfile = $HOME/.gitignore_global
+  excludesfile = ~/.gitignore_global
   pager = diff-so-fancy | less --tabs=4 -RFX
   editor = vim
   ignorecase = false
@@ -19,6 +19,7 @@
   # typos
   statsu = status
   comit = commit
+  commmit = commit
 
   # shortcuts
   cc = rev-list HEAD --count
@@ -27,6 +28,7 @@
   dc = diff --cached
   pfl = push --force-with-lease
   pr = pull --rebase
+  rom = rebase origin/master
   s = status
 
   cleanup = !"git branch --merged | egrep -v '^(\\*.+|(\\s+master)?)$' | xargs git branch -d && git remote prune origin"
