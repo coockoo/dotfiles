@@ -1,18 +1,40 @@
-hi FoldColumn            ctermfg=15   ctermbg=NONE
-hi Folded                ctermfg=15   ctermbg=67
+let g:colors_name = 'custom'
+set background=dark
 
-hi jsFuncName            ctermfg=3   ctermbg=NONE
-hi jsFuncBraces          ctermfg=3   ctermbg=NONE
+" Global highlights
+hi ColorColumn  ctermfg=NONE ctermbg=7    cterm=NONE
+hi Comment      ctermfg=8    ctermbg=NONE cterm=NONE
+hi Constant     ctermfg=1    ctermbg=NONE cterm=NONE
+hi DiffAdd      ctermfg=2    ctermbg=NONE cterm=NONE
+hi DiffChange   ctermfg=11   ctermbg=NONE cterm=NONE
+hi DiffDelete   ctermfg=1    ctermbg=NONE cterm=NONE
+hi Directory    ctermfg=4    ctermbg=NONE cterm=NONE
+hi Error        ctermfg=0    ctermbg=1    cterm=NONE term=NONE
+hi Folded       ctermfg=15   ctermbg=67   cterm=NONE
+hi FoldColumn   ctermfg=15   ctermbg=NONE cterm=NONE
+hi Identifier   ctermfg=14   ctermbg=NONE cterm=NONE
+hi LineNr       ctermfg=130  ctermbg=NONE cterm=NONE
+hi Pmenu        ctermfg=0    ctermbg=255  cterm=NONE
+hi PreProc      ctermfg=1    ctermbg=NONE cterm=NONE
+hi SignColumn   ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Special      ctermfg=5    ctermbg=NONE cterm=NONE
+hi Statement    ctermfg=130  ctermbg=NONE cterm=NONE
+hi Title        ctermfg=5    ctermbg=NONE cterm=NONE
+hi Todo         ctermfg=8    ctermbg=NONE cterm=BOLD
+hi Type         ctermfg=2    ctermbg=NONE cterm=NONE
+hi Underlined   ctermfg=11   ctermbg=NONE cterm=UNDERLINE
+
+" js
+hi def link jsArrowFunction  Noise
+hi def link jsOperator       Noise
+hi def link jsVariableDef    Identifier
+hi def link jsFuncCall       Identifier
+
 hi jsIfElseBraces        ctermfg=3   ctermbg=NONE
 hi jsRepeatBraces        ctermfg=3   ctermbg=NONE
 hi jsTryCatchBraces      ctermfg=3   ctermbg=NONE
 hi jsClassBraces         ctermfg=3   ctermbg=NONE
 hi jsClassProperty       ctermfg=3   ctermbg=NONE
-" hi jsObjectBraces        ctermfg=3  ctermbg=NONE
-" hi jsDestructuringBraces ctermfg=3  ctermbg=NONE
-" hi jsBrackets            ctermfg=3  ctermbg=NONE
-
-hi jsFuncCall            ctermfg=15  ctermbg=NONE
 
 hi jsStorageClass        ctermfg=5   ctermbg=NONE
 hi jsClassKeyword        ctermfg=5   ctermbg=NONE
@@ -20,17 +42,11 @@ hi jsExtendsKeyword      ctermfg=5   ctermbg=NONE
 hi jsFunction            ctermfg=5   ctermbg=NONE
 hi jsExportDefault       ctermfg=5   ctermbg=NONE
 hi jsAsyncKeyword        ctermfg=5   ctermbg=NONE
-" hi jsString              ctermfg=2   ctermbg=NONE
-" hi jsTemplateString      ctermfg=2   ctermbg=NONE
-" hi jsReturn              ctermfg=1   ctermbg=NONE
+hi jsOperatorKeyword     ctermfg=5   ctermbg=NONE cterm=NONE
 
-hi jsParens              ctermfg=14  ctermbg=NONE
-hi jsFuncParens          ctermfg=14  ctermbg=NONE
-hi jsOperator            ctermfg=14  ctermbg=NONE
 hi jsRestOperator        ctermfg=14  ctermbg=NONE
 hi jsSpreadOperator      ctermfg=14  ctermbg=NONE
 hi jsTernaryIfOperator   ctermfg=14  ctermbg=NONE
-hi jsArrowFunction       ctermfg=14  ctermbg=NONE
 
 hi cssClassName          ctermfg=1   ctermbg=NONE
 hi cssClassNameDot       ctermfg=1   ctermbg=NONE
@@ -80,22 +96,15 @@ hi tsxIntrinsicTagName      ctermfg=6   ctermbg=NONE
 hi ALEErrorSign   ctermfg=16 ctermbg=1  cterm=bold
 hi ALEWarningSign ctermfg=16 ctermbg=11 cterm=bold
 
+hi jsxComponentName ctermfg=6   ctermbg=NONE
 hi jsxTagName       ctermfg=6   ctermbg=NONE
 hi jsxPunct         ctermfg=6   ctermbg=NONE
 hi jsxCloseString   ctermfg=6   ctermbg=NONE
 
-" Global highlights
-hi Comment    ctermfg=8    ctermbg=NONE
-hi DiffAdd    ctermfg=2    ctermbg=NONE
-hi DiffChange ctermfg=11   ctermbg=NONE
-hi DiffDelete ctermfg=1    ctermbg=NONE
-hi Pmenu      ctermfg=0    ctermbg=255
-hi SignColumn ctermfg=NONE ctermbg=NONE
-hi Todo       ctermfg=8    ctermbg=NONE cterm=bold
-
 " Coc
 hi CocErrorSign   ctermfg=1  ctermbg=NONE
-hi CocWarningSign ctermfg=11 ctermbg=NONE
+" TODO: Warning is not readable on 255 background
+hi CocWarningSign ctermfg=11 ctermbg=0
 hi CocInfoSign    ctermfg=4  ctermbg=NONE
 hi CocHintSign    ctermfg=12 ctermbg=NONE
 
@@ -103,3 +112,10 @@ hi CocHintSign    ctermfg=12 ctermbg=NONE
 hi StatusLineDefault ctermbg=15 ctermfg=16
 hi StatusLineMode ctermbg=2 ctermfg=15 cterm=bold
 hi StatusLineGitBranch ctermbg=6 ctermfg=15 cterm=bold
+
+" Markdown
+hi markdownCode          ctermfg=1    ctermbg=NONE
+hi markdownCodeDelimiter ctermfg=1    ctermbg=NONE
+
+" HTML
+hi htmlItalic ctermfg=14 ctermbg=NONE cterm=NONE term=NONE
