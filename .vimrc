@@ -1,127 +1,109 @@
-" Use Vundle
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin()
+  Plug 'preservim/nerdtree'
+  Plug 'jistr/vim-nerdtree-tabs'
+  Plug 'itchyny/vim-gitbranch'
+  Plug 'pangloss/vim-javascript'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+  Plug 'dense-analysis/ale'
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+  Plug 'airblade/vim-gitgutter'
+  Plug 'hail2u/vim-css3-syntax'
+  Plug 'mattn/emmet-vim'
+  Plug 'jparise/vim-graphql'
+  Plug 'maxmellon/vim-jsx-pretty'
+  Plug 'groenewege/vim-less'
+  Plug 'stephpy/vim-yaml'
+call plug#end()
 
-call vundle#begin()
-
-" Let Vundle manage itself
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'dense-analysis/ale'
-Plugin 'hail2u/vim-css3-syntax'
-" Plugin 'juleswang/css.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'preservim/nerdtree'
-Plugin 'chr4/nginx.vim'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'jparise/vim-graphql'
-Plugin 'pangloss/vim-javascript'
-Plugin 'maxmellon/vim-jsx-pretty'
-Plugin 'groenewege/vim-less'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'stephpy/vim-yaml'
-Plugin 'itchyny/vim-gitbranch'
-
-call vundle#end()
-
+" Line numbers to the left
+set number
+" The maximum width of the <Tab> character
+set tabstop=2
+" The size of the indent
+set shiftwidth=2
+" Replace tabs with spaces
+set expandtab
+" Bye folds!
+set nofoldenable
+" Set cursor on the left side of the tab sign. Note extra space after the last slash
+set list lcs=tab:\ \
+" Make backspace work great
+set backspace=indent,eol,start
+" Vertical line for 120 symbols
+set colorcolumn=120
+" Colorscheme. For some reason, it doesn't work with the background=dark
+colorscheme custom
+" Setup detection plugin and indent on
 filetype plugin indent on
-
+" Enable vim syntax colors
 syntax on
-
+" Set encoding to utf-8
+scriptencoding utf-8
+set encoding=utf-8
+" TextEdit might fail if hidden is not set.
 set hidden
+" Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
+" Give more space for displaying messages.
 set cmdheight=1
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+" Duration of the timeouts for command-pending commands (such as <leader>...)
+set timeoutlen=1000
+" Duration of the timeouts for key codes (esc, left, right etc)
+set ttimeoutlen=0
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+" Normal mouse selection and scroll
+set mouse=a
+" Prevent long line wrapping
 set nowrap
-set number
-set tabstop=2
-set shiftwidth=2
-" Expand tabs to spaces
-set expandtab
-set backspace=indent,eol,start
-set ruler
-" default updatetime 4000ms is not good for async update
-set updatetime=100
-" Hide mode at the bottom
+" Don't show mode in the cmd line, as we have it in the statusline
 set noshowmode
+" Ruler
+set ruler
+" Autoread. Load file on it was changed from the global
+set autoread
+" This option controls the behavior when switching between buffers.
+set switchbuf=useopen,usetab
+
+" leaders
+let maplocalleader = ','
+
+" Copy a file to the buffer
+nnoremap <localleader>yf ggVG"+y
 
 " Show tabs, trailing spaces, endofilnes in by pressing F2
 nnoremap <F2> :<C-U>setlocal lcs=tab:>-,space:.,trail:-,eol:$ list! list? <CR>
 
-" Set encoding to utf-8
-scriptencoding utf-8
-set encoding=utf-8
-
-" Ctrl-P
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-let g:ctrlp_map = '<C-O>'
-let g:ctrlp_open_new_file = 't'
-let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<c-t>'], 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'] }
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-
-" Vim-javascript
-let javascript_enable_domhtmlcss=1
-
-" Set cursor on the left side of the tab sign
-set list lcs=tab:\ \ 
-" extra space after tab
-
-" UltiSnips
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-let g:UltiSnipsEditSplit="vertical"
-
-" Disable <C-c> for SQL files and replace it with C-j
-let g:ftplugin_sql_omni_key = '<C-j>'
-
-" NERDComment
-let g:NERDComToggleComment = '<C-/>'
-
-" NERDTree
-let g:NERDTreeCascadeSingleChildDir = 0
-" Reveal current file in tree
-nmap ,r :NERDTreeFind<CR>
-let g:nerdtree_tabs_open_on_console_startup=1
+" Reveal current file in tree.
+nnoremap <localleader>r :NERDTreeFind<CR>
 let g:NERDTreeIgnore = ['\.swp$', '^.DS_Store$']
 
-" coc.nvim
-" Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-let g:coc_global_extensions = [ 'coc-tsserver' ]
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" Remove Press ? for help and (up a dir)
+let g:NERDTreeMinimalUI = 1
+" Open NERDTree on console vim startup.
+let g:nerdtree_tabs_open_on_console_startup = 1
 
-" Colorscheme
-let g:rehash256=1
-set background=light " Kappa. IDK why
-colorscheme custom
-
-" Normal mouse selection and scroll
-set mouse=a
+" Statusline configuration
+set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineDefault#\  " Mode
+set statusline+=%f\                                                    " Filename + separator
+set statusline+=%y\                                                    " Filetype + separator
+set statusline+=%=                                                     " Switch to the right side
+set statusline+=%{SyntaxItem()}\                                       " Display word group (for syntax)
+set statusline+=%#StatusLineGitBranch#\ %{gitbranch#name()}\           " Git branch
 
 " Get word group for word under cursor
 function! SyntaxItem()
@@ -132,39 +114,35 @@ let s:mode_map = {
 \   'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL', 'V': 'V-LINE', "\<C-v>": 'V-BLOCK',
 \   'c': 'COMMAND', 's': 'SELECT', 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', 't': 'TERMINAL'
 \ }
-
 function! GetMode() abort
   return get(s:mode_map, mode(), '')
 endfunction
 
-" Statusline configuration
-set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineDefault#\  " Mode
-set statusline+=%f\                                                    " Filename + separator
-set statusline+=%y\                                                    " Filetype + separator
-set statusline+=%=                                                     " Switch to the right side
-set statusline+=%{SyntaxItem()}\                                       " Display word group (for syntax)
-set statusline+=%#StatusLineGitBranch#\ %{gitbranch#name()}\           " Git branch
+" Setup command aliases
+" https://stackoverflow.com/a/3879737/1162326
+function! SetupCommandAlias(from, to)
+  exec 'cnoreabbrev <expr> '.a:from.' ((getcmdtype() is# ":" && getcmdline() is# "'.a:from.'") ? ("'.a:to.'") : ("'.a:from.'"))'
+endfunction
 
-" Vertical line for 100 symbols
-set colorcolumn=100
-hi ColorColumn ctermbg=7 guibg=#666666
+call SetupCommandAlias("W","w")
+call SetupCommandAlias("Tabm","tabm")
+call SetupCommandAlias("Tabo","tabo")
 
-" ALE settings
+" ale
 let g:ale_linters = {
-  \ 'javascript': ['eslint'],
-  \ 'typescript': ['eslint']
-  \ }
+\ 'javascript': ['eslint'],
+\ 'typescript': ['eslint']
+\ }
 let g:ale_fixers = {
-  \ 'javascript': ['prettier'],
-  \ 'javascript.jsx': ['prettier'],
-  \ 'json': ['prettier'],
-  \ 'typescript': ['prettier'],
-  \ 'typescriptreact': ['prettier'],
-  \ 'css': ['prettier'],
-  \ 'less': ['prettier'],
-  \ 'html': [],
-  \ 'sql': []
-  \ }
+\ 'javascript': ['prettier'],
+\ 'javascript.jsx': ['prettier'],
+\ 'json': ['prettier'],
+\ 'typescript': ['prettier'],
+\ 'typescript.tsx': ['prettier'],
+\ 'typescriptreact': ['prettier'],
+\ 'css': ['prettier'],
+\ 'less': ['prettier']
+\ }
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
@@ -175,18 +153,79 @@ let g:ale_typescript_eslint_use_global = 0
 let g:ale_typescript_eslint_options = '--cache'
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '>>'
-" let g:ale_sql_pgformatter_options = '--function-case 1 --keyword-case 1 --spaces 2'
 
-" Setup command aliases
-" https://stackoverflow.com/a/3879737/1162326
-fun! SetupCommandAlias(from, to)
-  exec 'cnoreabbrev <expr> '.a:from
-        \ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:from.'")'
-        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
-endfun
-call SetupCommandAlias("W","w")
-call SetupCommandAlias("Tabm","tabm")
-call SetupCommandAlias("Tabo","tabo")
+" coc
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+" GoTo code navigation.
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gy <Plug>(coc-type-definition)
+nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap <silent> gr <Plug>(coc-references)
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" Use fzf
-set rtp+=/usr/local/opt/fzf
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Set filetype to typescript.tsx
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+" Set filetype for Wix javascript files
+autocmd BufNewFile,BufRead *.jsw set filetype=javascript
+
+" Ctrl + L will move to another tab
+noremap <C-l> :tabn<CR>
+noremap <C-h> :tabp<CR>
+
+" Disable <C-c> for SQL files and replace it with C-j
+let g:ftplugin_sql_omni_key = '<C-j>'
+
+" Vim-javascript
+let g:javascript_enable_domhtmlcss=1
+
+" Typos
+iabbrev cosnt  const
+iabbrev ocnst  const
+iabbrev retunr return
+iabbrev THursday Thursday
+iabbrev thursday Thursday
+
+" operator-pending mappings
+" parentheses
+onoremap p i(
+" next parentheses
+onoremap np :<c-u>normal! f(vi(<cr>
+
+autocmd FileType markdown call <SID>setupMarkdown()
+function! s:setupMarkdown()
+  set wrap
+  set linebreak
+endfunction
+
+" fzf
+nnoremap <C-o> :GFiles<CR>
+nnoremap <C-p> :Files<CR>
+let g:fzf_action = {
+\ 'enter': 'tabedit'
+\ }
