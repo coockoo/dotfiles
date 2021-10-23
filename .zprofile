@@ -1,8 +1,4 @@
-# Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
 export PATH="$HOME/.yarn/bin:$PATH"
-
 export PATH="/usr/local/sbin:$PATH"
 
 # Load .nvmrc file for directory enter
@@ -18,7 +14,8 @@ enter_directory() {
 }
 precmd() { enter_directory; }
 
-alias ls='ls -G'
+alias ls='lsd --group-dirs first --date "+%F %T"'
+alias lsa='ls -A'
 alias gti='git'
 alias gt='git'
 alias ag="ag --pager 'less -R'"
