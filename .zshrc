@@ -86,3 +86,5 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
   compinit
 fi
+
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
