@@ -88,3 +88,6 @@ if type brew &>/dev/null; then
 fi
 
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+
+# Load private configuration
+[ -f "$HOME/.zshrc.private" ] && source "$HOME/.zshrc.private"
