@@ -3,9 +3,6 @@
   pager = diff-so-fancy | less --tabs=4 -RFX
   editor = vim
   ignorecase = false
-[user]
-  email = alex.coockoo@gmail.com
-  name = Oleksandr Bondarchuk
 [push]
   default = current
 [alias]
@@ -30,5 +27,8 @@
   pr = pull --rebase
   rom = rebase origin/master
   s = status
+  grh = git reset HEAD
 
   cleanup = !"git branch --merged | egrep -v '^(\\*.+|(\\s+master)?)$' | xargs git branch -d && git remote prune origin"
+[init]
+  defaultBranch = master
