@@ -1,68 +1,67 @@
 #!/usr/bin/env sh
 
-# Set zsh as default shell
-EXPECTED_SHELL="/bin/zsh"
+function setup_link() {
+  echo "linking $1..."
+  if ! [ -f "$HOME/$1" ]; then
+    ln "$1" "$HOME/$1";
+    echo "linked  $1!";
+  else
+    echo "exists  $1"
+  fi
+}
 
-# Set default shell to zsh
-echo "Setting default shell to zsh..."
-if ! [ "$SHELL" == "$EXPECTED_SHELL" ]; then
-  chsh -s /bin/zsh
-  echo "zsh is now a default shell"
-else
-  echo "zsh is already a default shell"
-fi
+function setup_default_shell() {
+  echo "Setting default shell to $1..."
+  if ! [ "$SHELL" == "$1" ]; then
+    chsh -s "$1"
+    echo "$1 is now a default shell"
+  else
+    echo "$1 is already a default shell"
+  fi
+}
 
-# Install oh-my-zsh
-echo "Installing oh-my-zsh..."
-if ! [ -d "$HOME/.oh-my-zsh" ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  echo "Successfully installed oh-my-zsh"
-else
-  echo "oh-my-zsh is already installed"
-fi
+function setup_install_oh_my_zsh() {
+  echo "Installing oh-my-zsh..."
+  if ! [ -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    echo "Successfully installed oh-my-zsh"
+  else
+    echo "oh-my-zsh is already installed"
+  fi
+}
 
-# Install custom oh-my-zsh theme
-echo "Installing oh-my-zsh theme..."
-if ! [ -f "$HOME/.oh-my-zsh/custom/themes/coockoo.zsh-theme" ]; then
-  ln oh-my-zsh/custom/themes/coockoo.zsh-theme "$HOME/.oh-my-zsh/custom/themes/coockoo.zsh-theme"
-  echo "Successfully installed oh-my-zsh theme"
-else
-  echo "oh-my-zsh theme is already installed"
-fi
+function setup_oh_my_zsh_theme() {
+  echo "Installing oh-my-zsh theme $1..."
+  if ! [ -f "$HOME/.oh-my-zsh/custom/themes/$1.zsh-theme" ]; then
+    ln "./oh-my-zsh/custom/themes/$1.zsh-theme" "$HOME/.oh-my-zsh/custom/themes/$1.zsh-theme"
+    echo "Successfully installed oh-my-zsh theme"
+  else
+    echo "oh-my-zsh theme is already installed"
+  fi
+}
+
+setup_default_shell "/bin/zsh"
+setup_install_oh_my_zsh
+setup_oh_my_zsh_theme "coockoo"
 
 # Install Vim
 echo "Installing Vim from brew..."
 brew list vim || brew install vim
 echo "Successfully installed Vim"
 
-echo "Linking .vimrc..."
-if ! [ -f "$HOME/.vimrc" ]; then
-  ln .vimrc "$HOME/.vimrc"
-fi
+setup_link ".vimrc"
 
-# Create directory for Vim
-echo "Creating directory for Vim..."
-mkdir -p $HOME/.vim/bundle
-echo "Directory for Vim created"
+echo "Creating directories for Vim..."
+mkdir -p "$HOME/.vim/colors"
+echo "Directories for Vim created"
 
 # Setup Vim colorscheme
 echo "Linking color scheme"
 if ! [ -f "$HOME/.vim/colors/custom.vim" ]; then
-  mkdir -p "$HOME/.vim/colors"
   ln vim/colors/custom.vim "$HOME/.vim/colors/custom.vim"
   echo "Successfully linked vim colors"
 else
   echo "Vim colors already linked"
-fi
-
-# Install Vundle for Vim
-echo "Installing Vundle for Vim..."
-if ! [ -d "$HOME/.vim/bundle/Vundle.vim" ]; then
-  git clone https://github.com/VundleVim/Vundle.vim "$HOME/.vim/bundle/Vundle.vim"
-  vim +PluginInstall +qall
-  echo "Vundle successfully installed"
-else
-  echo "Vundle is alredy installed"
 fi
 
 # Link coc-settings.json
@@ -114,35 +113,14 @@ fi
 # Install nvm
 echo "Installing nvm..."
 if ! [ -f "$HOME/.nvm/nvm.sh" ]; then
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | zsh
   echo "Successfully installed nvm"
 else
   echo "nvm is already installed"
 fi
 
-# Link config and startup files
-echo "Linkind config and startup files..."
-
-echo "Linking .zshrc..."
-if ! [ -f "$HOME/.zshrc" ]; then
-  ln .zshrc "$HOME/.zshrc"
-fi
-
-echo "Linking .zprofile..."
-if ! [ -f "$HOME/.zprofile" ]; then
-  ln .zprofile "$HOME/.zprofile"
-fi
-
-echo "Linking .gitconfig..."
-if ! [ -f "$HOME/.gitconfig" ]; then
-  ln .gitconfig "$HOME/.gitconfig"
-fi
-
-echo "Linking .gitignore_global..."
-if ! [ -f "$HOME/.gitignore_global" ]; then
-  ln .gitignore_global "$HOME/.gitignore_global"
-fi
-
-echo "Successfully linked startup files"
+setup_link ".zshrc"
+setup_link ".gitconfig"
+setup_link ".gitignore_global"
 
 echo "Done!"
