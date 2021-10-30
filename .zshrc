@@ -18,11 +18,10 @@ export LC_ALL=en_US.UTF-8
 export EDITOR=vim
 
 alias edittheme="$EDITOR ~/.oh-my-zsh/themes/$ZSH_THEME.zsh-theme"
-alias ls='lsd --group-dirs first --date "+%F %T"'
-alias lsa='ls -A'
+alias ag="ag --pager 'less -R'"
+# typos
 alias gti='git'
 alias gt='git'
-alias ag="ag --pager 'less -R'"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
