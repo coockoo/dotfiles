@@ -1,12 +1,14 @@
 #!/usr/bin/env sh
 
 function setup_link() {
-  echo "linking $1..."
-  if ! [ -f "$HOME/$1" ]; then
-    ln "$1" "$HOME/$1";
-    echo "linked  $1!";
+  from=$1
+  [ -z $2 ] && to=$1 || to=$2
+  echo "linking $from -> $to..."
+  if ! [ -f "$HOME/$to" ]; then
+    ln "$from" "$HOME/$to";
+    echo "linked  $from -> $to";
   else
-    echo "exists  $1"
+    echo "exists  $from -> $to"
   fi
 }
 
@@ -55,23 +57,8 @@ echo "Creating directories for Vim..."
 mkdir -p "$HOME/.vim/colors"
 echo "Directories for Vim created"
 
-# Setup Vim colorscheme
-echo "Linking color scheme"
-if ! [ -f "$HOME/.vim/colors/custom.vim" ]; then
-  ln vim/colors/custom.vim "$HOME/.vim/colors/custom.vim"
-  echo "Successfully linked vim colors"
-else
-  echo "Vim colors already linked"
-fi
-
-# Link coc-settings.json
-echo "Linking coc-settings.json..."
-if ! [ -f "$HOME/.vim/coc-settings.json" ]; then
-  ln vim/coc-settings.json "$HOME/.vim/coc-settings.json"
-  echo "Successfully linked coc-settings.json"
-else
-  echo "Already linked coc-settings.json"
-fi
+setup_link "vim/colors/custom.vim" ".vim/colors/custom.vim"
+setup_link "vim/coc-settings.json" ".vim/coc-settings.json"
 
 # Install diff-so-fancy
 echo "Installing diff-so-fancy..."
