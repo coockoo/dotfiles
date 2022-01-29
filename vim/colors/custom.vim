@@ -5,6 +5,7 @@ set background=dark
 hi ColorColumn  ctermfg=NONE ctermbg=7    cterm=NONE
 hi Comment      ctermfg=8    ctermbg=NONE cterm=NONE
 hi Constant     ctermfg=1    ctermbg=NONE cterm=NONE
+hi Conceal      ctermfg=7    ctermbg=NONE cterm=NONE
 hi DiffAdd      ctermfg=2    ctermbg=NONE cterm=NONE
 hi DiffChange   ctermfg=11   ctermbg=NONE cterm=NONE
 hi DiffDelete   ctermfg=1    ctermbg=NONE cterm=NONE
@@ -102,11 +103,12 @@ hi jsxPunct         ctermfg=6   ctermbg=NONE
 hi jsxCloseString   ctermfg=6   ctermbg=NONE
 
 " Coc
-hi CocErrorSign   ctermfg=1  ctermbg=NONE
+hi CocErrorSign   ctermfg=1    ctermbg=NONE
 " TODO: Warning is not readable on 255 background
-hi CocWarningSign ctermfg=11 ctermbg=0
-hi CocInfoSign    ctermfg=4  ctermbg=NONE
-hi CocHintSign    ctermfg=12 ctermbg=NONE
+hi CocWarningSign ctermfg=11   ctermbg=0
+hi CocInfoSign    ctermfg=4    ctermbg=NONE
+hi CocHintSign    ctermfg=12   ctermbg=NONE
+hi CocFadeOut                               cterm=underline
 
 " Custom StatusLine colors
 hi StatusLineDefault ctermbg=15 ctermfg=16
