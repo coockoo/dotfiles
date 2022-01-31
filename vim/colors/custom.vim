@@ -104,11 +104,12 @@ hi jsxCloseString   ctermfg=6   ctermbg=NONE
 
 " Coc
 hi CocErrorSign   ctermfg=1    ctermbg=NONE
-" TODO: Warning is not readable on 255 background
-hi CocWarningSign ctermfg=11   ctermbg=0
+hi CocWarningSign ctermfg=0  ctermbg=255
 hi CocInfoSign    ctermfg=4    ctermbg=NONE
 hi CocHintSign    ctermfg=12   ctermbg=NONE
 hi CocFadeOut                               cterm=underline
+
+hi def link FgCocWarningFloatBgCocFloating  CocWarningSign
 
 " Custom StatusLine colors
 hi StatusLineDefault ctermbg=15 ctermfg=16
