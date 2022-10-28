@@ -2258,7 +2258,6 @@
 	<key>ToolbeltTools</key>
 	<array>
 		<string>Jobs</string>
-		<string>Notes</string>
 	</array>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
