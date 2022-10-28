@@ -78,6 +78,8 @@ set ruler
 set autoread
 " This option controls the behavior when switching between buffers.
 set switchbuf=useopen,usetab
+" this has to do something with the buffer
+set re=1
 
 " leaders
 let maplocalleader = ','
@@ -93,22 +95,31 @@ nnoremap <localleader>r :NERDTreeFind<CR>
 let g:NERDTreeIgnore = ['\.swp$', '^.DS_Store$']
 
 " Remove Press ? for help and (up a dir)
-let g:NERDTreeMinimalUI = 1
+let NERDTreeMinimalUI = 1
+" Makes small menu for add/delete/move commands
+" related to this issue https://github.com/preservim/nerdtree/issues/1321#issuecomment-1229071986
+let NERDTreeMinimalMenu=1
 " Open NERDTree on console vim startup.
 let g:nerdtree_tabs_open_on_console_startup = 1
+" make nerdtee reuse
+" let g:NERDTreeMapCustomOpen = 't'
+" let g:NERDTreeMapOpenInTab = '<CR>'
+" let g:NERDTreeCustomOpenArgs = {'file': {'reuse': 'all', 'where': 'p', 'keepopen':1, 'stay':0}, 'dir':{}}
 
 " Statusline configuration
 set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineDefault#\  " Mode
-set statusline+=%f\                                                    " Filename + separator
+set statusline+=%{expand('%:~:.')}\                                    " Filename + separator
 set statusline+=%y\                                                    " Filetype + separator
 set statusline+=%=                                                     " Switch to the right side
-set statusline+=%{SyntaxItem()}\                                       " Display word group (for syntax)
+set statusline+=%{coc#status()}                                        " Display coc status
 set statusline+=%#StatusLineGitBranch#\ %{gitbranch#name()}\           " Git branch
 
 " Get word group for word under cursor
 function! SyntaxItem()
-	return synIDattr(synID(line("."),col("."),1),"name")
+  return synIDattr(synID(line("."), col("."), 1), "name")
 endfunction
+" Display current syntax group under the cursor
+nnoremap <localleader>si :echo SyntaxItem()<CR>
 
 let s:mode_map = {
 \   'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL', 'V': 'V-LINE', "\<C-v>": 'V-BLOCK',
@@ -141,7 +152,9 @@ let g:ale_fixers = {
 \ 'typescript.tsx': ['prettier'],
 \ 'typescriptreact': ['prettier'],
 \ 'css': ['prettier'],
-\ 'less': ['prettier']
+\ 'less': ['prettier'],
+\ 'scss': ['prettier'],
+\ 'markdown': ['remove_trailing_lines', 'trim_whitespace']
 \ }
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
@@ -157,10 +170,12 @@ let g:ale_sign_warning = '>>'
 " coc
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  \ coc#pum#visible() ? coc#pum#next(1) :
+  \ CheckBackspace() ? "\<Tab>" :
+  \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 " Use <c-space> to trigger completion.
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
@@ -168,14 +183,21 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 " GoTo code navigation.
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gy <Plug>(coc-type-definition)
-nnoremap <silent> gi <Plug>(coc-implementation)
-nnoremap <silent> gr <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+" Use ctrl + j for expanding snippets
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_prev = '<c-k>'
 
-function! s:check_back_space() abort
+" Symbol renaming.
+nmap <localleader>rn <Plug>(coc-rename)
+
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
@@ -210,6 +232,8 @@ iabbrev ocnst  const
 iabbrev retunr return
 iabbrev THursday Thursday
 iabbrev thursday Thursday
+iabbrev lenght length
+iabbrev pslit split
 
 " operator-pending mappings
 " parentheses
