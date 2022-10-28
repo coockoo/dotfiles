@@ -28,6 +28,7 @@
   rom = rebase origin/master
   s = status
   rh = reset HEAD
+  res = restore --staged
 
   cleanup = !"git branch --merged | egrep -v '^(\\*.+|(\\s+master)?)$' | xargs git branch -d && git remote prune origin"
   sync="!git stash && git pull --rebase && git stash pop"
