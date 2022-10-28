@@ -142,7 +142,8 @@ call SetupCommandAlias("Tabo","tabo")
 " ale
 let g:ale_linters = {
 \ 'javascript': ['eslint'],
-\ 'typescript': ['eslint']
+\ 'typescript': ['eslint'],
+\ 'json': []
 \ }
 let g:ale_fixers = {
 \ 'javascript': ['prettier'],
