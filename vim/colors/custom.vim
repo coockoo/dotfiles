@@ -104,7 +104,7 @@ hi jsxCloseString   ctermfg=6   ctermbg=NONE
 
 " Coc
 hi CocErrorSign   ctermfg=1    ctermbg=NONE
-hi CocWarningSign ctermfg=0  ctermbg=255
+hi CocWarningSign ctermfg=0    ctermbg=255
 hi CocInfoSign    ctermfg=4    ctermbg=NONE
 hi CocHintSign    ctermfg=12   ctermbg=NONE
 hi CocFadeOut                               cterm=underline
