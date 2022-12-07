@@ -86,6 +86,8 @@ let maplocalleader = ','
 
 " Copy a file to the buffer
 nnoremap <localleader>yf ggVG"+y
+" Copy filename to the buffer
+nnoremap <localleader>p :let @+ = expand("%")<cr>
 
 " Show tabs, trailing spaces, endofilnes in by pressing F2
 nnoremap <F2> :<C-U>setlocal lcs=tab:>-,space:.,trail:-,eol:$ list! list? <CR>
