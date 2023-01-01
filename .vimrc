@@ -157,6 +157,7 @@ let g:ale_fixers = {
 \ 'css': ['prettier'],
 \ 'less': ['prettier'],
 \ 'scss': ['prettier'],
+\ 'html': ['prettier'],
 \ 'markdown': ['remove_trailing_lines', 'trim_whitespace']
 \ }
 let g:ale_lint_on_text_changed = 'never'
