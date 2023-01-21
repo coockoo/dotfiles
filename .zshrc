@@ -61,6 +61,3 @@ precmd() { enter_directory; }
 
 # Load Glasgow Haskell Compiler
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
-
-# Load private configuration
-[ -f "$HOME/.zshrc.private" ] && source "$HOME/.zshrc.private"
