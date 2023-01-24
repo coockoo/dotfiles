@@ -65,3 +65,5 @@ precmd() { enter_directory; }
 __git_files () {
   _wanted files expl 'local files' _files
 }
+
+[ -d "$(brew --prefix)/Caskroom/google-cloud-sdk" ] && source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
