@@ -61,3 +61,7 @@ precmd() { enter_directory; }
 
 # Load Glasgow Haskell Compiler
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
+
+__git_files () {
+  _wanted files expl 'local files' _files
+}
