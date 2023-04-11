@@ -103,6 +103,9 @@ let NERDTreeMinimalUI = 1
 let NERDTreeMinimalMenu=1
 " Open NERDTree on console vim startup.
 let g:nerdtree_tabs_open_on_console_startup = 1
+let g:nerdtree_tabs_autoclose = 0
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | tabc | endif
 " make nerdtee reuse
 " let g:NERDTreeMapCustomOpen = 't'
 " let g:NERDTreeMapOpenInTab = '<CR>'
@@ -217,8 +220,12 @@ endfunction
 
 " Set filetype to typescript.tsx
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+autocmd BufNewFile,BufRead *.mts set filetype=typescript
+autocmd BufNewFile,BufRead *.cts set filetype=typescript
 " Set filetype for Wix javascript files
 autocmd BufNewFile,BufRead *.jsw set filetype=javascript
+autocmd BufNewFile,BufRead *.mjs set filetype=javascript
+autocmd BufNewFile,BufRead *.cjs set filetype=javascript
 
 " Ctrl + L will move to another tab
 noremap <C-l> :tabn<CR>
