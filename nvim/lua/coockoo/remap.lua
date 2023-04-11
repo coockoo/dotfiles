@@ -1,7 +1,6 @@
 -- move lines in visual mode
--- TODO: for some reason works only one time
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv'")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv'")
+vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv")
 
 -- join keeps cursor in place
 vim.keymap.set("n", "J", "mzJ`z")

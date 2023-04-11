@@ -37,16 +37,21 @@ lsp.set_preferences({
   }
 })
 
+local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
 local null_ls = require("null-ls")
 local null_opts = lsp.build_options('null-ls', {
-  on_attach = function(client)
-    -- if client.resolved_capabilities.document_formatting then
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      desc = "Auto format before save",
-      pattern = "<buffer>",
-      callback = vim.lsp.buf.format,
-    })
-    -- end
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = bufnr,
+        group = group,
+        desc = "Auto format before save",
+        callback = function()
+          vim.lsp.buf.format({ bufnr = bufnr })
+        end,
+      })
+    end
   end
 })
 

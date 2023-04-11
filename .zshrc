@@ -15,13 +15,14 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-export EDITOR=vim
+export EDITOR=nvim
 
 alias edittheme="$EDITOR ~/.oh-my-zsh/themes/$ZSH_THEME.zsh-theme"
 alias ag="ag --pager 'less -R'"
 # typos
 alias gti='git'
 alias gt='git'
+alias vim='nvim'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
