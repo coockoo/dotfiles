@@ -39,11 +39,19 @@ return require('packer').startup(function(use)
     }
   }
   use {
-    "nvim-neo-tree/neo-tree.nvim",
+    'nvim-neo-tree/neo-tree.nvim',
     branch = "v2.x",
     requires = {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
+    }
+  }
+
+  use {
+    'MunifTanjim/prettier.nvim',
+    requires = {
+      'neovim/nvim-lspconfig',
+      'jose-elias-alvarez/null-ls.nvim',
     }
   }
 end)

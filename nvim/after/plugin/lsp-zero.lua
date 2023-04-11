@@ -21,8 +21,6 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
   ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
   ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  ['<Tab>'] = cmp_action.luasnip_supertab(),
-  ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
 })
 
 lsp.setup_nvim_cmp({
@@ -36,6 +34,27 @@ lsp.set_preferences({
     warn = 'W',
     hint = 'H',
     info = 'I'
+  }
+})
+
+local null_ls = require("null-ls")
+local null_opts = lsp.build_options('null-ls', {
+  on_attach = function(client)
+    -- if client.resolved_capabilities.document_formatting then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        desc = "Auto format before save",
+        pattern = "<buffer>",
+        callback = vim.lsp.buf.format,
+      })
+    -- end
+  end
+})
+
+null_ls.setup({
+  on_attach = null_opts.on_attach,
+  sources = {
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.diagnostics.eslint,
   }
 })
 

@@ -1,0 +1,3 @@
+rm -rf ~/.config/nvim/after && cp -r nvim/after ~/.config/nvim/after
+rm -rf ~/.config/nvim/lua && cp -r nvim/lua ~/.config/nvim/lua
+rm -rf ~/.config/nvim/init.lua && cp nvim/init.lua ~/.config/nvim/init.lua
