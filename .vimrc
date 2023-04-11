@@ -15,6 +15,7 @@ call plug#begin()
   Plug 'maxmellon/vim-jsx-pretty'
   Plug 'groenewege/vim-less'
   Plug 'stephpy/vim-yaml'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 call plug#end()
 
 " Line numbers to the left
@@ -256,6 +257,7 @@ autocmd FileType markdown call <SID>setupMarkdown()
 function! s:setupMarkdown()
   set wrap
   set linebreak
+  nmap <localleader>mp <Plug>MarkdownPreview
 endfunction
 
 " fzf
