@@ -1,0 +1,7 @@
+vim.cmd("iabbrev cosnt const")
+vim.cmd("iabbrev ocnst const")
+vim.cmd("iabbrev retunr return")
+vim.cmd("iabbrev THursday Thursday")
+vim.cmd("iabbrev thursday Thursday")
+vim.cmd("iabbrev lenght length")
+vim.cmd("iabbrev pslit split")
