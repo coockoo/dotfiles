@@ -41,11 +41,11 @@ local null_ls = require("null-ls")
 local null_opts = lsp.build_options('null-ls', {
   on_attach = function(client)
     -- if client.resolved_capabilities.document_formatting then
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        desc = "Auto format before save",
-        pattern = "<buffer>",
-        callback = vim.lsp.buf.format,
-      })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      desc = "Auto format before save",
+      pattern = "<buffer>",
+      callback = vim.lsp.buf.format,
+    })
     -- end
   end
 })
