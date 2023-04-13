@@ -2,7 +2,11 @@ local lsp = require('lsp-zero').preset({})
 
 lsp.on_attach(function(client, bufnr)
   lsp.default_keymaps({ buffer = bufnr })
-  lsp.buffer_autoformat()
+  lsp.buffer_autoformat(client, bufnr, {
+    filter = function()
+      return vim.bo[bufnr].filetype ~= "yaml"
+    end
+  })
 end)
 
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
@@ -15,7 +19,6 @@ lsp.ensure_installed({
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_action = require('lsp-zero').cmp_action()
 
 local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
@@ -48,7 +51,12 @@ local null_opts = lsp.build_options('null-ls', {
         group = group,
         desc = "Auto format before save",
         callback = function()
-          vim.lsp.buf.format({ bufnr = bufnr })
+          vim.lsp.buf.format({
+            bufnr = bufnr,
+            filter = function()
+              return vim.bo[bufnr].filetype ~= "yaml"
+            end
+          })
         end,
       })
     end
