@@ -1,19 +1,42 @@
 local lsp = require('lsp-zero').preset({})
+local lspconfig = require('lspconfig')
 
 lsp.on_attach(function(client, bufnr)
   lsp.default_keymaps({ buffer = bufnr })
   lsp.buffer_autoformat(client, bufnr, {
     filter = function()
-      return vim.bo[bufnr].filetype ~= "yaml"
+      return vim.bo[bufnr].filetype ~= 'yaml'
     end
   })
 end)
 
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls({
+  settings = {
+    Lua = {
+      -- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
+      format = {
+        enable = true,
+        defaultConfig = {
+          indent_style = 'space',
+          indent_size = '2',
+          quote_style = 'single',
+        }
+      },
+    }
+  }
+}))
+
+lspconfig.yamlls.setup({
+  settings = {
+    yaml = {
+      keyOrdering = false
+    }
+  }
+})
 
 lsp.ensure_installed({
-  "tsserver",
-  "eslint",
+  'tsserver',
+  'eslint',
 })
 
 
@@ -40,21 +63,21 @@ lsp.set_preferences({
   }
 })
 
-local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
-local null_ls = require("null-ls")
+local group = vim.api.nvim_create_augroup('lsp_format_on_save', { clear = false })
+local null_ls = require('null-ls')
 local null_opts = lsp.build_options('null-ls', {
   on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
+    if client.supports_method('textDocument/formatting') then
       vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
-      vim.api.nvim_create_autocmd("BufWritePre", {
+      vim.api.nvim_create_autocmd('BufWritePre', {
         buffer = bufnr,
         group = group,
-        desc = "Auto format before save",
+        desc = 'Auto format before save',
         callback = function()
           vim.lsp.buf.format({
             bufnr = bufnr,
             filter = function()
-              return vim.bo[bufnr].filetype ~= "yaml"
+              return vim.bo[bufnr].filetype ~= 'yaml'
             end
           })
         end,
