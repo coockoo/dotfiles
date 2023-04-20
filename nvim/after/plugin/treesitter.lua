@@ -1,5 +1,5 @@
 require 'nvim-treesitter.configs'.setup {
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "typescript" },
+  ensure_installed = { 'c', 'lua', 'vim', 'vimdoc', 'query', 'javascript', 'typescript', 'html' },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -16,4 +16,7 @@ require 'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+  autotag = {
+    enable = true,
+  }
 }

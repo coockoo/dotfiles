@@ -1,4 +1,4 @@
-require("coockoo.iabbrev")
-require("coockoo.packer")
-require("coockoo.remap")
-require("coockoo.set")
+require('coockoo.iabbrev')
+require('coockoo.packer')
+require('coockoo.set')
+require('coockoo.remap')
