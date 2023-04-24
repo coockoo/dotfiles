@@ -1,19 +1,19 @@
-local prettier = require("prettier")
+local prettier = require('prettier')
 
-prettier.setup({
+prettier.setup {
   bin = 'prettierd',
   filetypes = {
-    "css",
-    "graphql",
-    "html",
-    "javascript",
-    "javascriptreact",
-    "json",
-    "less",
-    "markdown",
-    "scss",
-    "typescript",
-    "typescriptreact",
-    "yaml",
+    'css',
+    'graphql',
+    'html',
+    'javascript',
+    'javascriptreact',
+    'json',
+    'less',
+    'markdown',
+    'scss',
+    'typescript',
+    'typescriptreact',
+    'yaml',
   },
-})
+}

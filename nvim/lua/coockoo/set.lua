@@ -1,4 +1,4 @@
-vim.opt.guicursor = "a:-blinkwait175-blinkoff150-blinkon175"
+vim.opt.guicursor = 'a:-blinkwait175-blinkoff150-blinkon175'
 
 vim.opt.number = true
 
@@ -13,24 +13,24 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv('HOME') .. "/.vim/undodir"
+vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
-vim.opt.syntax = 'enable'
+vim.opt.syntax = 'on'
 
 vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = 'yes'
 
 vim.opt.updatetime = 50
 vim.opt.timeoutlen = 1000
 vim.opt.ttimeoutlen = 0
 
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = '120'
 
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
 
-vim.opt.encoding = "utf-8"
+vim.opt.encoding = 'utf-8'
