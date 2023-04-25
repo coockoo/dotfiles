@@ -64,6 +64,8 @@ lsp.set_preferences({
   }
 })
 
+lsp.skip_server_setup({ 'eslint' })
+
 local group = vim.api.nvim_create_augroup('lsp_format_on_save', { clear = false })
 local null_ls = require('null-ls')
 local null_opts = lsp.build_options('null-ls', {
@@ -92,7 +94,7 @@ null_ls.setup({
   on_attach = null_opts.on_attach,
   sources = {
     null_ls.builtins.formatting.prettierd,
-    null_ls.builtins.diagnostics.eslint,
+    null_ls.builtins.diagnostics.eslint_d,
   }
 })
 
