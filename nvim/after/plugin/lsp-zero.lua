@@ -1,17 +1,17 @@
-local lsp = require('lsp-zero').preset({})
+local lsp_zero = require('lsp-zero').preset({})
 local lspconfig = require('lspconfig')
 
-lsp.on_attach(function(client, bufnr)
+lsp_zero.on_attach(function(client, bufnr)
   client.server_capabilities.semanticTokensProvider = nil
-  lsp.default_keymaps({ buffer = bufnr })
-  lsp.buffer_autoformat(client, bufnr, {
+  lsp_zero.default_keymaps({ buffer = bufnr })
+  lsp_zero.buffer_autoformat(client, bufnr, {
     filter = function()
       return vim.bo[bufnr].filetype ~= 'yaml'
     end
   })
 end)
 
-lspconfig.lua_ls.setup(lsp.nvim_lua_ls({
+lspconfig.lua_ls.setup(lsp_zero.nvim_lua_ls({
   settings = {
     Lua = {
       -- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
@@ -35,7 +35,7 @@ lspconfig.yamlls.setup({
   }
 })
 
-lsp.ensure_installed({
+lsp_zero.ensure_installed({
   'tsserver',
   'eslint',
 })
@@ -44,17 +44,17 @@ lsp.ensure_installed({
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-local cmp_mappings = lsp.defaults.cmp_mappings({
+local cmp_mappings = lsp_zero.defaults.cmp_mappings({
   ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
   ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
   ['<CR>'] = cmp.mapping.confirm({ select = true }),
 })
 
-lsp.setup_nvim_cmp({
+lsp_zero.setup_nvim_cmp({
   mapping = cmp_mappings
 })
 
-lsp.set_preferences({
+lsp_zero.set_preferences({
   suggest_lsp_servers = false,
   sign_icons = {
     error = 'E',
@@ -64,11 +64,11 @@ lsp.set_preferences({
   }
 })
 
-lsp.skip_server_setup({ 'eslint' })
+lsp_zero.skip_server_setup({ 'eslint' })
 
 local group = vim.api.nvim_create_augroup('lsp_format_on_save', { clear = false })
 local null_ls = require('null-ls')
-local null_opts = lsp.build_options('null-ls', {
+local null_opts = lsp_zero.build_options('null-ls', {
   on_attach = function(client, bufnr)
     client.server_capabilities.semanticTokensProvider = nil
     if client.supports_method('textDocument/formatting') then
@@ -98,7 +98,7 @@ null_ls.setup({
   }
 })
 
-lsp.setup()
+lsp_zero.setup()
 
 vim.diagnostic.config({
   virtual_text = true
