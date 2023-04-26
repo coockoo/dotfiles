@@ -103,3 +103,12 @@ lsp_zero.setup()
 vim.diagnostic.config({
   virtual_text = true
 })
+
+require('luasnip.loaders.from_snipmate').lazy_load()
+
+cmp.setup({
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  }
+})
