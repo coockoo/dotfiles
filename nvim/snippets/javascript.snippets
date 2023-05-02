@@ -1,0 +1,12 @@
+snippet "for" "for loop"
+	for (let ${2:i} = 0; $2 < ${1:arr}.length; ++$2) {
+		${3:$1[$2]}$0
+	}
+
+snippet bfor "for loop backwards"
+	for (let ${2:i} = ${1:arr}.length - 1; $2 >=0; --$2) {
+		${3:$1[$2]}$0
+	}
+
+snippet cl "console.log"
+	console.log(${0:${VISUAL}})
