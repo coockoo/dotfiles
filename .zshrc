@@ -23,6 +23,7 @@ alias ag="ag --pager 'less -R'"
 alias gti='git'
 alias gt='git'
 alias vim='nvim'
+alias vi='nvim'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
