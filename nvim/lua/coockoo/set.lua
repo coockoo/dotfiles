@@ -34,3 +34,5 @@ vim.opt.colorcolumn = '120'
 vim.g.mapleader = ' '
 
 vim.opt.encoding = 'utf-8'
+
+vim.opt.showmode = false
