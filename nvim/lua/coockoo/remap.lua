@@ -18,7 +18,7 @@ vim.keymap.set('v', '<leader>y', '"+y')
 vim.keymap.set('n', '<leader>Y', '"+Y')
 
 -- yank a file into system clipboard
-vim.keymap.set('n', '<leader>yf', 'mzggVG"+y`z')
+vim.keymap.set('n', '<leader>yf', 'mzggVG"+y`z', { desc = 'yank a file into system clipboard' })
 
 -- delete into black hole
 vim.keymap.set('n', '<leader>d', '"_d')
