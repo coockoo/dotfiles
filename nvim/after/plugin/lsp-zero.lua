@@ -1,13 +1,15 @@
 local lsp_zero = require('lsp-zero').preset({})
 local lspconfig = require('lspconfig')
 
+local filter = function(client, bufnr)
+  return vim.bo[bufnr].filetype ~= 'yaml' and client.name ~= 'tsserver'
+end
+
 lsp_zero.on_attach(function(client, bufnr)
   client.server_capabilities.semanticTokensProvider = nil
   lsp_zero.default_keymaps({ buffer = bufnr })
   lsp_zero.buffer_autoformat(client, bufnr, {
-    filter = function()
-      return vim.bo[bufnr].filetype ~= 'yaml'
-    end
+    filter = function() filter(client, bufnr) end
   })
 end)
 
@@ -37,7 +39,6 @@ lspconfig.yamlls.setup({
 
 lsp_zero.ensure_installed({
   'tsserver',
-  'eslint',
 })
 
 
@@ -80,9 +81,7 @@ local null_opts = lsp_zero.build_options('null-ls', {
         callback = function()
           vim.lsp.buf.format({
             bufnr = bufnr,
-            filter = function()
-              return vim.bo[bufnr].filetype ~= 'yaml'
-            end
+            filter = function() return filter(client, bufnr) end
           })
         end,
       })
