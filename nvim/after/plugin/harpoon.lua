@@ -3,9 +3,7 @@ local ui = require('harpoon.ui')
 local harpoon = require('harpoon')
 
 harpoon.setup({
-  global_settings = {
-    tabline = true
-  }
+  tabline = true,
 })
 
 vim.keymap.set('n', '<leader>a', mark.add_file)
