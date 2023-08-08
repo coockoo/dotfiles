@@ -67,5 +67,8 @@ return require('packer').startup(function(use)
     ft = { 'markdown' }
   }
 
-  use 'airblade/vim-gitgutter'
+  use {
+    'airblade/vim-gitgutter',
+    branch = 'main'
+  }
 end)
