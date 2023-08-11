@@ -4,7 +4,7 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    'nvim-telescope/telescope.nvim', tag = '0.1.2',
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
@@ -39,9 +39,7 @@ return require('packer').startup(function(use)
 
   use {
     'ThePrimeagen/harpoon',
-    requires = {
-      'nvim-lua/plenary.nvim'
-    }
+    requires = { 'nvim-lua/plenary.nvim' }
   }
   use {
     'nvim-neo-tree/neo-tree.nvim',

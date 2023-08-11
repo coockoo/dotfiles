@@ -3,6 +3,7 @@ local actions = require("telescope.actions")
 
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
 vim.keymap.set('n', '<C-o>', builtin.git_files, {})
+vim.keymap.set('n', '<C-i>', builtin.buffers, {})
 vim.keymap.set('n', '<leader>ps', function()
   builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end)
