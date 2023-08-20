@@ -69,3 +69,10 @@ __git_files () {
 }
 
 [ -d "$(brew --prefix)/Caskroom/google-cloud-sdk" ] && source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
+# Say hi to python
+export PYENV_ROOT="$HOME/.pyenv"
+if type pyenv &>/dev/null; then
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
