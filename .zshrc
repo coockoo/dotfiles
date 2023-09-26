@@ -8,7 +8,7 @@ ZSH_THEME="coockoo"
 
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git nvm z fzf)
+plugins=(nvm z fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -19,6 +19,10 @@ export EDITOR=nvim
 
 alias edittheme="$EDITOR ~/.oh-my-zsh/themes/$ZSH_THEME.zsh-theme"
 alias ag="ag --pager 'less -R'"
+# use bat instead of cat
+if type bat &>/dev/null; then
+  alias cat='bat'
+fi
 # typos
 alias gti='git'
 alias gt='git'
