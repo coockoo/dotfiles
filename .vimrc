@@ -239,13 +239,14 @@ let g:ftplugin_sql_omni_key = '<C-j>'
 let g:javascript_enable_domhtmlcss=1
 
 " Typos
-iabbrev cosnt  const
-iabbrev ocnst  const
-iabbrev retunr return
+iabbrev cosnt    const
+iabbrev ocnst    const
+iabbrev retunr   return
 iabbrev THursday Thursday
 iabbrev thursday Thursday
-iabbrev lenght length
-iabbrev pslit split
+iabbrev lenght   length
+iabbrev pslit    split
+iabbrev tempalte template
 
 " operator-pending mappings
 " parentheses
