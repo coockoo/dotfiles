@@ -24,10 +24,12 @@ require('telescope').setup {
       },
     },
     sorting_strategy = "ascending",
+    color_devicons = false
   },
   pickers = {
-    find_files = {
-      disable_devicons = true
+    git_files = {
+      use_git_root = false,
+      show_untracked = true
     }
   },
 }
