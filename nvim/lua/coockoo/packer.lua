@@ -69,4 +69,6 @@ return require('packer').startup(function(use)
     'airblade/vim-gitgutter',
     branch = 'main'
   }
+
+  use 'github/copilot.vim'
 end)
