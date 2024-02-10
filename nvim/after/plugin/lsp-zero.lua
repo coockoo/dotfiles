@@ -51,6 +51,10 @@ local cmp_mappings = lsp_zero.defaults.cmp_mappings({
   ['<CR>'] = cmp.mapping.confirm({ select = true }),
 })
 
+-- copilot conflicts
+cmp_mappings['<Tab>'] = nil
+cmp_mappings['<S-Tab>'] = nil
+
 lsp_zero.setup_nvim_cmp({
   mapping = cmp_mappings
 })
