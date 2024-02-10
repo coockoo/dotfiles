@@ -11,6 +11,10 @@ lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.buffer_autoformat(client, bufnr, {
     filter = function() filter(client, bufnr) end
   })
+
+  vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.references() end, { buffer = bufnr })
+  vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, { buffer = bufnr })
+
 end)
 
 lspconfig.lua_ls.setup(lsp_zero.nvim_lua_ls({
