@@ -19,6 +19,9 @@ end)
 
 lspconfig.lua_ls.setup(lsp_zero.nvim_lua_ls({
   settings = {
+    ltex = {
+      language = 'en-GB',
+    },
     Lua = {
       -- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
       format = {
