@@ -33,5 +33,10 @@ vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- make file executable (chmod +x)
 vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true })
 
--- checkout current changes in current file
+-- git checkout current changes in current file
 vim.keymap.set('n', '<leader>gco', '<cmd>Git checkout -- %<CR>', { silent = true })
+-- git add
+vim.keymap.set('n', '<leader>ga', '<cmd>Git add %<CR>', { silent = true })
+
+-- leave only split
+vim.keymap.set('n', '<leader>o', '<C-w>o')
