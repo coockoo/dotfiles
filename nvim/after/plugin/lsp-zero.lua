@@ -12,9 +12,8 @@ lsp_zero.on_attach(function(client, bufnr)
     filter = function() filter(client, bufnr) end
   })
 
-  vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.references() end, { buffer = bufnr })
-  vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, { buffer = bufnr })
-
+  vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.references() end, { buffer = bufnr, desc = 'references' })
+  vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, { buffer = bufnr, desc = 'rename' })
 end)
 
 lspconfig.lua_ls.setup(lsp_zero.nvim_lua_ls({
