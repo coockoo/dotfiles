@@ -22,8 +22,8 @@
   # shortcuts
   cc = rev-list HEAD --count
   co = checkout
-  d = diff
-  dc = diff --cached
+  d = diff --relative
+  dc = diff --cached --relative
   pfl = push --force-with-lease
   pr = pull --rebase
   rom = rebase origin/master
