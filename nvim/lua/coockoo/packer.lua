@@ -4,7 +4,7 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.2',
+    'nvim-telescope/telescope.nvim', tag = '0.1.6',
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
@@ -43,7 +43,7 @@ return require('packer').startup(function(use)
   }
   use {
     'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v2.x',
+    branch = 'v3.x',
     requires = {
       'nvim-lua/plenary.nvim',
       'MunifTanjim/nui.nvim',
