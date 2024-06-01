@@ -7,12 +7,15 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim', tag = '0.1.6',
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
-  use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    { run = ':TSUpdate' }
+  }
   use 'mbbill/undotree'
   use 'tpope/vim-fugitive'
 
-  use { 'L3MON4D3/LuaSnip' }
-  use { 'saadparwaiz1/cmp_luasnip' }
+  use 'L3MON4D3/LuaSnip'
+  use 'saadparwaiz1/cmp_luasnip'
 
   use {
     'VonHeikemen/lsp-zero.nvim',
@@ -20,14 +23,13 @@ return require('packer').startup(function(use)
     requires = {
       {
         'williamboman/mason.nvim',
-        run = function() pcall(vim.cmd, 'MasonUpdate') end
+        run = ':MasonUpdate'
       },
       { 'williamboman/mason-lspconfig.nvim' },
 
       { 'neovim/nvim-lspconfig' },
       { 'hrsh7th/nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp' },
-      { 'L3MON4D3/LuaSnip' },
     }
   }
 
