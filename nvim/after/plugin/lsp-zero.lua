@@ -1,5 +1,6 @@
 local lsp_zero = require('lsp-zero').preset({})
 local lspconfig = require('lspconfig')
+local cmp = require('cmp')
 
 local filter = function(client, bufnr)
   return vim.bo[bufnr].filetype ~= 'yaml' and client.name ~= 'tsserver'
@@ -12,8 +13,8 @@ lsp_zero.on_attach(function(client, bufnr)
     filter = function() filter(client, bufnr) end
   })
 
-  vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.references() end, { buffer = bufnr, desc = 'references' })
-  vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, { buffer = bufnr, desc = 'rename' })
+  vim.keymap.set('n', '<leader>rr', function() vim.lsp.buf.references() end, { buffer = bufnr, desc = 'references' })
+  vim.keymap.set('n', '<leader>rn', function() vim.lsp.buf.rename() end, { buffer = bufnr, desc = 'rename' })
 end)
 
 lspconfig.lua_ls.setup(lsp_zero.nvim_lua_ls({
@@ -38,7 +39,7 @@ lspconfig.ltex.setup({
       enabled = false,
       language = 'en-GB',
       dictionary = {
-        ['en-GB'] = {'Dorine', 'ack'}
+        ['en-GB'] = { 'Dorine', 'ack' }
       }
     }
   }
@@ -52,28 +53,6 @@ lspconfig.yamlls.setup({
   }
 })
 
-lsp_zero.ensure_installed({
-  'tsserver',
-})
-
-
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-local cmp_mappings = lsp_zero.defaults.cmp_mappings({
-  ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<CR>'] = cmp.mapping.confirm({ select = true }),
-})
-
--- copilot conflicts
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
-
-lsp_zero.setup_nvim_cmp({
-  mapping = cmp_mappings
-})
-
 lsp_zero.set_preferences({
   suggest_lsp_servers = false,
   sign_icons = {
@@ -83,8 +62,6 @@ lsp_zero.set_preferences({
     info = 'I'
   }
 })
-
-lsp_zero.skip_server_setup({ 'eslint' })
 
 local group = vim.api.nvim_create_augroup('lsp_format_on_save', { clear = false })
 local null_ls = require('null-ls')
@@ -125,7 +102,17 @@ vim.diagnostic.config({
 
 require('luasnip.loaders.from_snipmate').lazy_load()
 
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 cmp.setup({
+  mapping = cmp.mapping.preset.insert({
+    ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
+    ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    -- copilot conflicts
+    ['<Tab>'] = nil,
+    ['<S-Tab>'] = nil,
+  }),
+  formatting = lsp_zero.cmp_format(),
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
