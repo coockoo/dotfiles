@@ -66,7 +66,12 @@ function enter_directory() {
 precmd() { enter_directory; }
 
 # Load Glasgow Haskell Compiler
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
+if [ -d "$HOME/.ghcup" ]; then
+  path=($HOME/.ghcup/bin $path)
+fi
+if [ -d "$HOME/.cabal" ]; then
+  path=($HOME/.cabal/bin $path)
+fi
 
 __git_files () {
   _wanted files expl 'local files' _files
