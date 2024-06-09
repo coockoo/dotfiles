@@ -33,18 +33,6 @@ lspconfig.lua_ls.setup(lsp_zero.nvim_lua_ls({
   }
 }))
 
-lspconfig.ltex.setup({
-  settings = {
-    ltex = {
-      enabled = false,
-      language = 'en-GB',
-      dictionary = {
-        ['en-GB'] = { 'Dorine', 'ack' }
-      }
-    }
-  }
-})
-
 lspconfig.yamlls.setup({
   settings = {
     yaml = {
