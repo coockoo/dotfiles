@@ -47,14 +47,11 @@ export HISTCONTROL="ignoredups:erasedups"
 export HISTORY_IGNORE="(ls|[bf]g|exit|z|git status|git s|git diff|git d|git dc|vim|history)"
 
 if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  fpath=($(brew --prefix)/share/zsh-completions $fpath)
 
   autoload -Uz compinit
   compinit
 fi
-
-# unknown line from the .zprofile
-fpath=(/usr/local/share/zsh-completions $fpath)
 
 # Load .nvmrc file for directory enter
 function enter_directory() {
