@@ -42,4 +42,4 @@ vim.keymap.set('n', '<leader>ga', '<cmd>Git add %<CR>', { silent = true })
 vim.keymap.set('n', '<leader>o', '<C-w>o')
 
 -- only for work setup (annoying)
-vim.keymap.set('n', '<leader>lf', '<cmd>!yarn lint --fix %<CR>')
+vim.keymap.set('n', '<leader>lf', '<cmd>!yarn lint --fix %<CR><CR>')
