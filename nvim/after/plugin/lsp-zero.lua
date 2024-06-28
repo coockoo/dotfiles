@@ -3,15 +3,19 @@ local lspconfig = require('lspconfig')
 local cmp = require('cmp')
 
 local filter = function(client, bufnr)
-  return vim.bo[bufnr].filetype ~= 'yaml' and client.name ~= 'tsserver'
+  local ft = vim.bo[bufnr].filetype
+  return (
+    ft ~= 'yaml' and ft ~= 'haskell'
+    and client.name ~= 'tsserver'
+  )
 end
 
 lsp_zero.on_attach(function(client, bufnr)
   client.server_capabilities.semanticTokensProvider = nil
   lsp_zero.default_keymaps({ buffer = bufnr })
-  lsp_zero.buffer_autoformat(client, bufnr, {
-    filter = function() filter(client, bufnr) end
-  })
+  if filter(client, bufnr) then
+    lsp_zero.buffer_autoformat(client, bufnr)
+  end
 
   vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, { buffer = bufnr, desc = 'signature help' })
   vim.keymap.set('n', '<leader>rn', function() vim.lsp.buf.rename() end, { buffer = bufnr, desc = 'rename' })

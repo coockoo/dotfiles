@@ -1,3 +1,4 @@
 vim.g.copilot_filetypes = {
-  markdown = false
+  markdown = false,
+  haskell = false
 }
