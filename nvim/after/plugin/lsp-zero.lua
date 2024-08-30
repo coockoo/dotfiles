@@ -2,6 +2,11 @@ local lsp_zero = require('lsp-zero').preset({})
 local lspconfig = require('lspconfig')
 local cmp = require('cmp')
 
+-- todo: remove lspzero in favour of lspconfig
+-- todo: remove null-ls for same reasons
+
+--- @param client vim.lsp.Client
+--- @param bufnr integer
 local filter = function(client, bufnr)
   local ft = vim.bo[bufnr].filetype
   return (
@@ -58,6 +63,8 @@ lsp_zero.set_preferences({
 local group = vim.api.nvim_create_augroup('lsp_format_on_save', { clear = false })
 local null_ls = require('null-ls')
 local null_opts = lsp_zero.build_options('null-ls', {
+  --- @param client vim.lsp.Client
+  --- @param bufnr integer
   on_attach = function(client, bufnr)
     if not client.supports_method('textDocument/formatting') then
       return
