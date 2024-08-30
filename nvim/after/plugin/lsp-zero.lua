@@ -100,7 +100,7 @@ cmp.setup({
     ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    -- copilot conflicts
+    -- disabled due to copilot, now not needed
     ['<Tab>'] = nil,
     ['<S-Tab>'] = nil,
   }),
