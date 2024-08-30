@@ -20,12 +20,14 @@
   commmit = commit
 
   # shortcuts
+  b = branch
   cc = rev-list HEAD --count
   co = checkout
   d = diff --relative
   dc = diff --cached --relative
   pfl = push --force-with-lease
   pr = pull --rebase
+  rp = pull --rebase
   rom = rebase origin/master
   s = status
   rh = reset HEAD
