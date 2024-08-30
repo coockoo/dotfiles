@@ -5,9 +5,7 @@ vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = 'Open telescope all fi
 vim.keymap.set('n', '<C-o>', builtin.git_files, { desc = 'Open telescope git files' })
 vim.keymap.set('n', '<C-b>', builtin.buffers, { desc = 'Open telescope buffers' })
 vim.keymap.set('n', '<C-g>', builtin.live_grep, { desc = 'Open telescope live grep' })
-vim.keymap.set('n', '<leader>ps', function()
-  builtin.grep_string({ search = vim.fn.input("Grep > ") })
-end)
+vim.keymap.set('n', '<leader>r', builtin.resume, { desc = 'Resume telescope' })
 
 require('telescope').setup {
   defaults = {
