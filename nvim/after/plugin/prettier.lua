@@ -3,7 +3,6 @@ local prettier = require('prettier')
 prettier.setup {
   bin = 'prettierd',
   filetypes = {
-    'css',
     'graphql',
     'html',
     'javascript',
@@ -11,7 +10,6 @@ prettier.setup {
     'json',
     'less',
     'markdown',
-    'scss',
     'tsx',
     'typescript',
     'typescriptreact',

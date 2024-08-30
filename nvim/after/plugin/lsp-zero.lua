@@ -59,21 +59,25 @@ local group = vim.api.nvim_create_augroup('lsp_format_on_save', { clear = false 
 local null_ls = require('null-ls')
 local null_opts = lsp_zero.build_options('null-ls', {
   on_attach = function(client, bufnr)
-    client.server_capabilities.semanticTokensProvider = nil
-    if client.supports_method('textDocument/formatting') then
-      vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        buffer = bufnr,
-        group = group,
-        desc = 'Auto format before save',
-        callback = function()
-          vim.lsp.buf.format({
-            bufnr = bufnr,
-            filter = function() return filter(client, bufnr) end
-          })
-        end,
-      })
+    if not client.supports_method('textDocument/formatting') then
+      return
     end
+    client.server_capabilities.semanticTokensProvider = nil
+    vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      buffer = bufnr,
+      group = group,
+      desc = 'Auto format before save',
+      callback = function()
+        if not vim.lsp.buf_is_attached(bufnr, client.id) or vim.lsp.client_is_stopped(client.id) then
+          return
+        end
+        vim.lsp.buf.format({
+          bufnr = bufnr,
+          filter = function() return filter(client, bufnr) end
+        })
+      end,
+    })
   end
 })
 
