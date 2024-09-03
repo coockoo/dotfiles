@@ -17,13 +17,9 @@ end
 
 lsp_zero.on_attach(function(client, bufnr)
   client.server_capabilities.semanticTokensProvider = nil
-  lsp_zero.default_keymaps({ buffer = bufnr })
   if filter(client, bufnr) then
     lsp_zero.buffer_autoformat(client, bufnr)
   end
-
-  vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, { buffer = bufnr, desc = 'signature help' })
-  vim.keymap.set('n', '<leader>rn', function() vim.lsp.buf.rename() end, { buffer = bufnr, desc = 'rename' })
 end)
 
 lspconfig.lua_ls.setup(lsp_zero.nvim_lua_ls({
