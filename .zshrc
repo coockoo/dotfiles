@@ -66,7 +66,7 @@ precmd() { enter_directory; }
 [ -d "$HOME/.ghcup" ] && path=($HOME/.ghcup/bin $path)
 [ -d "$HOME/.cabal" ] && path=($HOME/.cabal/bin $path)
 # ghc-wasm
-[ -d "$HOME/.ghc-wasm" ] && source "$HOME/.ghc-wasm/env"
+# [ -d "$HOME/.ghc-wasm" ] && source "$HOME/.ghc-wasm/env"
 
 __git_files () {
   _wanted files expl 'local files' _files
