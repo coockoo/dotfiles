@@ -2235,6 +2235,8 @@ The script should do this: \(ai.prompt)</string>
 	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
 	<true/>
+	<key>ReportHorizontalScrollEvents</key>
+	<false/>
 	<key>RightCommand</key>
 	<integer>8</integer>
 	<key>RightOption</key>
