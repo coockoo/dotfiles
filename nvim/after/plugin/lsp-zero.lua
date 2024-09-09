@@ -17,6 +17,13 @@ local filter = function(client, bufnr)
   )
 end
 
+--[[
+-- in case some keymaps are missing – look here
+lsp_zero.on_attach(function(client, bufnr)
+  lsp_zero.default_keymaps({ buffer = bufnr })
+end)
+]] --
+
 lspconfig.lua_ls.setup(lsp_zero.nvim_lua_ls({
   settings = {
     Lua = {
