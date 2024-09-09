@@ -4,6 +4,8 @@ local cmp = require('cmp')
 
 -- todo: remove lspzero in favour of lspconfig
 -- todo: remove null-ls for same reasons
+-- this thing exists
+-- vim.lsp.buf.format({ async = true })
 
 --- @param client vim.lsp.Client
 --- @param bufnr integer
@@ -14,13 +16,6 @@ local filter = function(client, bufnr)
     and client.name ~= 'tsserver'
   )
 end
-
-lsp_zero.on_attach(function(client, bufnr)
-  client.server_capabilities.semanticTokensProvider = nil
-  if filter(client, bufnr) then
-    lsp_zero.buffer_autoformat(client, bufnr)
-  end
-end)
 
 lspconfig.lua_ls.setup(lsp_zero.nvim_lua_ls({
   settings = {
@@ -89,7 +84,6 @@ null_ls.setup({
   sources = {
     null_ls.builtins.formatting.prettierd,
     null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.formatting.black,
   }
 })
 
