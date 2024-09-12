@@ -58,6 +58,20 @@ lsp_zero.set_preferences({
   }
 })
 
+-- todo: think about naming
+local lsp_group = vim.api.nvim_create_augroup('my_lsp', {})
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = lsp_group,
+  desc = 'lsp configuration on buffer enter',
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    client.server_capabilities.semanticTokensProvider = nil
+  end
+})
+
 local group = vim.api.nvim_create_augroup('lsp_format_on_save', { clear = false })
 local null_ls = require('null-ls')
 local null_opts = lsp_zero.build_options('null-ls', {
@@ -67,7 +81,6 @@ local null_opts = lsp_zero.build_options('null-ls', {
     if not client.supports_method('textDocument/formatting') then
       return
     end
-    client.server_capabilities.semanticTokensProvider = nil
     vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
     vim.api.nvim_create_autocmd('BufWritePre', {
       buffer = bufnr,
