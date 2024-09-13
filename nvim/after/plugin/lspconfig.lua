@@ -4,12 +4,24 @@ local lspconfig = require('lspconfig')
 lspconfig.ts_ls.setup({})
 
 -- setup lua lsp server
--- todo: remove lsp_zero in favour of raw lspconfig
-local lsp_zero = require('lsp-zero')
-local lua_opts = lsp_zero.nvim_lua_ls({
+local function get_packer_modules ()
+  local start_path = vim.fs.joinpath(require('packer').config.package_root, 'packer', 'start')
+  local res = {}
+  for file in vim.fs.dir(start_path) do
+    local file_path = vim.fs.joinpath(start_path, file)
+    local luadir = vim.fs.find({ 'lua' }, { path = file_path,   })
+    if #luadir > 0 then
+      table.insert(res, luadir[1])
+    end
+  end
+  return res
+end
+local lua_library = vim.list_extend({ vim.env.VIMRUNTIME }, get_packer_modules())
+lspconfig.lua_ls.setup({
+  -- https://luals.github.io/wiki/settings/
   settings = {
     Lua = {
-      -- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
+      telemetry = { enable = false },
       format = {
         enable = true,
         defaultConfig = {
@@ -18,10 +30,13 @@ local lua_opts = lsp_zero.nvim_lua_ls({
           quote_style = 'single',
         }
       },
+      workspace = {
+        checkThirdParty = false,
+        library = lua_library,
+      }
     }
   }
 })
-lspconfig.lua_ls.setup(lua_opts)
 
 -- setup yaml lsp server
 lspconfig.yamlls.setup({
