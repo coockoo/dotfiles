@@ -8,7 +8,7 @@ mason.setup({
 })
 
 mason_lspconfig.setup({
-  ensure_installed = { 'tsserver', 'lua_ls' },
+  ensure_installed = { 'ts_ls', 'lua_ls' },
   handlers = {
     function(server_name)
       lspconfig[server_name].setup({})

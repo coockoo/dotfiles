@@ -49,14 +49,6 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'MunifTanjim/prettier.nvim',
-    requires = {
-      'neovim/nvim-lspconfig',
-      'jose-elias-alvarez/null-ls.nvim',
-    }
-  }
-
-  use {
     'iamcco/markdown-preview.nvim',
     run = 'cd app && npm install',
     setup = function() vim.g.mkdp_filetypes = { 'markdown' } end,

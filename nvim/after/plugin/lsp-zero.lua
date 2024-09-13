@@ -13,7 +13,7 @@ local filter = function(client, bufnr)
   local ft = vim.bo[bufnr].filetype
   return (
     ft ~= 'yaml' and ft ~= 'haskell'
-    and client.name ~= 'tsserver'
+    and client.name ~= 'tsserver' and client.name ~= 'ts_ls'
   )
 end
 
