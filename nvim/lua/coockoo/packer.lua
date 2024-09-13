@@ -28,7 +28,6 @@ return require('packer').startup(function(use)
         'williamboman/mason.nvim',
         run = ':MasonUpdate'
       },
-      { 'williamboman/mason-lspconfig.nvim' },
 
       { 'neovim/nvim-lspconfig' },
       { 'hrsh7th/nvim-cmp' },

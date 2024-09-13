@@ -1,5 +1,4 @@
 local lsp_zero = require('lsp-zero').preset({})
-local lspconfig = require('lspconfig')
 local cmp = require('cmp')
 
 -- todo: remove lspzero in favour of lspconfig
@@ -24,29 +23,6 @@ lsp_zero.on_attach(function(client, bufnr)
 end)
 ]] --
 
-lspconfig.lua_ls.setup(lsp_zero.nvim_lua_ls({
-  settings = {
-    Lua = {
-      -- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
-      format = {
-        enable = true,
-        defaultConfig = {
-          indent_style = 'space',
-          indent_size = '2',
-          quote_style = 'single',
-        }
-      },
-    }
-  }
-}))
-
-lspconfig.yamlls.setup({
-  settings = {
-    yaml = {
-      keyOrdering = false
-    }
-  }
-})
 
 lsp_zero.set_preferences({
   suggest_lsp_servers = false,
