@@ -1,7 +1,12 @@
 local lspconfig = require('lspconfig')
 
 -- setup typescript lsp server
-lspconfig.ts_ls.setup({})
+lspconfig.ts_ls.setup({
+  --- @param client vim.lsp.Client
+  on_attach = function (client)
+    client.server_capabilities.semanticTokensProvider = nil
+  end
+})
 
 -- setup lua lsp server
 local function get_packer_modules ()
@@ -81,4 +86,16 @@ lspconfig.efm.setup({
       typescriptreact = { prettier },
     },
   },
+})
+
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = {
+    text = {
+      error = 'E',
+      warn = 'W',
+      hint = 'H',
+      info = 'I'
+    }
+  }
 })
