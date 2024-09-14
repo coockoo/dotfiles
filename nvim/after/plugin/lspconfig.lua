@@ -3,18 +3,19 @@ local lspconfig = require('lspconfig')
 -- setup typescript lsp server
 lspconfig.ts_ls.setup({
   --- @param client vim.lsp.Client
-  on_attach = function (client)
+  on_attach = function(client)
     client.server_capabilities.semanticTokensProvider = nil
-  end
+  end,
 })
 
 -- setup lua lsp server
-local function get_packer_modules ()
+-- https://luals.github.io/wiki/settings/
+local function get_packer_modules()
   local start_path = vim.fs.joinpath(require('packer').config.package_root, 'packer', 'start')
   local res = {}
   for file in vim.fs.dir(start_path) do
     local file_path = vim.fs.joinpath(start_path, file)
-    local luadir = vim.fs.find({ 'lua' }, { path = file_path,   })
+    local luadir = vim.fs.find({ 'lua' }, { path = file_path })
     if #luadir > 0 then
       table.insert(res, luadir[1])
     end
@@ -23,7 +24,10 @@ local function get_packer_modules ()
 end
 local lua_library = vim.list_extend({ vim.env.VIMRUNTIME }, get_packer_modules())
 lspconfig.lua_ls.setup({
-  -- https://luals.github.io/wiki/settings/
+  --- @param client vim.lsp.Client
+  on_attach = function(client)
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
   settings = {
     Lua = {
       telemetry = { enable = false },
@@ -33,23 +37,24 @@ lspconfig.lua_ls.setup({
           indent_style = 'space',
           indent_size = '2',
           quote_style = 'single',
-        }
+          trailing_table_separator = 'smart',
+        },
       },
       workspace = {
         checkThirdParty = false,
         library = lua_library,
-      }
-    }
-  }
+      },
+    },
+  },
 })
 
 -- setup yaml lsp server
 lspconfig.yamlls.setup({
   settings = {
     yaml = {
-      keyOrdering = false
-    }
-  }
+      keyOrdering = false,
+    },
+  },
 })
 
 -- setup efm lsp server
@@ -71,9 +76,9 @@ lspconfig.efm.setup({
       buffer = buffer,
       group = group,
       desc = 'Auto format before save',
-      callback = function ()
+      callback = function()
         vim.lsp.buf.format({ bufnr = buffer })
-      end
+      end,
     })
   end,
   init_options = { documentFormatting = true },
@@ -95,7 +100,7 @@ vim.diagnostic.config({
       error = 'E',
       warn = 'W',
       hint = 'H',
-      info = 'I'
-    }
-  }
+      info = 'I',
+    },
+  },
 })
