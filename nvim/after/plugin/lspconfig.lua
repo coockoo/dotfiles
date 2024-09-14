@@ -46,3 +46,37 @@ lspconfig.yamlls.setup({
     }
   }
 })
+
+-- setup efm lsp server
+-- https://github.com/mattn/efm-langserver
+local prettier = {
+  formatCommand = 'prettierd "${INPUT}"',
+  formatStdin = true,
+}
+local group = vim.api.nvim_create_augroup('lsp_format_on_save', { clear = false })
+lspconfig.efm.setup({
+  --- @param client vim.lsp.Client
+  --- @param buffer integer
+  on_attach = function(client, buffer)
+    if not client.supports_method('textDocument/formatting') or client.is_stopped() then
+      return
+    end
+    vim.api.nvim_clear_autocmds({ buffer = buffer, group = group })
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      buffer = buffer,
+      group = group,
+      desc = 'Auto format before save',
+      callback = function ()
+        vim.lsp.buf.format({ bufnr = buffer })
+      end
+    })
+  end,
+  init_options = { documentFormatting = true },
+  filetypes = { 'typescript', 'javascript' },
+  settings = {
+    languages = {
+      typescript = { prettier },
+      javascript = { prettier },
+    },
+  },
+})
