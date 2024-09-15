@@ -1,4 +1,6 @@
 local cmp = require('cmp')
+require('luasnip.loaders.from_snipmate').lazy_load()
+
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 cmp.setup({
   mapping = cmp.mapping.preset.insert({

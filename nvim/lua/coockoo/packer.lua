@@ -20,20 +20,9 @@ return require('packer').startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'jose-elias-alvarez/null-ls.nvim'
 
-  use {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
-    requires = {
-      {
-        'williamboman/mason.nvim',
-        run = ':MasonUpdate'
-      },
-
-      { 'neovim/nvim-lspconfig' },
-      { 'hrsh7th/nvim-cmp' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-    }
-  }
+  use { 'williamboman/mason.nvim', run = ':MasonUpdate' }
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp'
 
   use 'mhartington/oceanic-next'
 
