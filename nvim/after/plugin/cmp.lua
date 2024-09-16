@@ -1,4 +1,8 @@
-local cmp = require('cmp')
+local success, cmp = pcall(require, 'cmp')
+if not success then
+  return
+end
+
 require('luasnip.loaders.from_snipmate').lazy_load()
 
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
