@@ -2,6 +2,7 @@ local lspconfig = require('lspconfig')
 
 -- setup typescript lsp server
 lspconfig.ts_ls.setup({
+  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
   --- @param client vim.lsp.Client
   on_attach = function(client)
     client.server_capabilities.semanticTokensProvider = nil
@@ -24,6 +25,7 @@ local function get_packer_modules()
 end
 local lua_library = vim.list_extend({ vim.env.VIMRUNTIME }, get_packer_modules())
 lspconfig.lua_ls.setup({
+  filetypes = { 'lua' },
   --- @param client vim.lsp.Client
   on_attach = function(client)
     client.server_capabilities.semanticTokensProvider = nil
@@ -91,6 +93,10 @@ lspconfig.efm.setup({
       typescriptreact = { prettier },
     },
   },
+})
+
+lspconfig.hls.setup({
+  filetypes = { 'haskell', 'cabal' },
 })
 
 vim.diagnostic.config({
