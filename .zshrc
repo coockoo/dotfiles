@@ -22,14 +22,18 @@ alias vim='nvim'
 alias vi='nvim'
 
 # https://github.com/junegunn/fzf
-export FZF_DEFAULT_OPTS='--reverse'
-source <(fzf --zsh)
+if type fzf &>/dev/null; then
+  export FZF_DEFAULT_OPTS='--reverse'
+  source <(fzf --zsh)
+end
 
 # https://github.com/rupa/z
 . /opt/homebrew/etc/profile.d/z.sh
 
 # https://github.com/Schniz/fnm
-eval "$(fnm env --use-on-cd --shell zsh --log-level error)"
+if type fnm &>/dev/null; then
+  eval "$(fnm env --use-on-cd --shell zsh --log-level error)"
+end
 
 setopt EXTENDED_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
