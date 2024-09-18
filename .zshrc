@@ -25,15 +25,21 @@ alias vi='nvim'
 if type fzf &>/dev/null; then
   export FZF_DEFAULT_OPTS='--reverse'
   source <(fzf --zsh)
-end
+fi
 
 # https://github.com/rupa/z
-. /opt/homebrew/etc/profile.d/z.sh
+function setup_z() {
+  local z_path=$(brew --prefix)/etc/profile.d/z.sh
+  if [ -f $z_path ]; then
+    . $z_path
+  fi
+}
+setup_z
 
 # https://github.com/Schniz/fnm
 if type fnm &>/dev/null; then
   eval "$(fnm env --use-on-cd --shell zsh --log-level error)"
-end
+fi
 
 setopt EXTENDED_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
