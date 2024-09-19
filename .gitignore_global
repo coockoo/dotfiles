@@ -2,3 +2,4 @@
 .DS_Store
 *.sw[mnop]
 local-scripts/
+node_modules/
