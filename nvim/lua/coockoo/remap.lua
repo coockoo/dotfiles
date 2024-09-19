@@ -56,3 +56,6 @@ vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = 'Go to implementa
 vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { desc = 'Signature help' })
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = 'Go to reference' })
 vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, { desc = 'Go to type definition' })
+
+-- treesitter
+vim.keymap.set('n', '<C-i>', '<cmd>Inspect<CR>', { silent = true, desc = 'inspect treesitter element' })
