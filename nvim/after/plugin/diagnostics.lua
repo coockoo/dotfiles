@@ -32,7 +32,10 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufWritePost' }, {
     end
 
     local eslint_success, eslint_res = pcall(function()
-      return vim.system({ 'eslint_d', filename, '--format', 'json' }, { text = true }):wait()
+      return vim.system({ 'eslint_d', filename, '--format', 'json' }, {
+        text = true,
+        env = { NODE_NO_WARNINGS = 1 },
+      }):wait()
     end)
     if not eslint_success then
       return critical_error('failed to execute eslint_d')
