@@ -10,6 +10,9 @@ alias edittheme="$EDITOR ~/.oh-my-zsh/themes/$ZSH_THEME.zsh-theme"
 source $ZSH/oh-my-zsh.sh
 zstyle ':omz:update' mode disabled
 
+# Set PATH, MANPATH, etc., for Homebrew.
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 alias ag="ag --pager 'less -R'"
 # use bat instead of cat
 if type bat &>/dev/null; then
