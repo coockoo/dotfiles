@@ -5,11 +5,11 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.x',
-    requires = { { 'nvim-lua/plenary.nvim' } }
+    requires = { { 'nvim-lua/plenary.nvim' } },
   }
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    run = ':TSUpdate',
   }
   use 'mbbill/undotree'
   use 'tpope/vim-fugitive'
@@ -27,7 +27,7 @@ return require('packer').startup(function(use)
 
   use {
     'ThePrimeagen/harpoon',
-    requires = { 'nvim-lua/plenary.nvim' }
+    requires = { 'nvim-lua/plenary.nvim' },
   }
   use {
     'nvim-neo-tree/neo-tree.nvim',
@@ -35,18 +35,18 @@ return require('packer').startup(function(use)
     requires = {
       'nvim-lua/plenary.nvim',
       'MunifTanjim/nui.nvim',
-    }
+    },
   }
 
   use {
     'iamcco/markdown-preview.nvim',
     run = 'cd app && npm install',
     setup = function() vim.g.mkdp_filetypes = { 'markdown' } end,
-    ft = { 'markdown' }
+    ft = { 'markdown' },
   }
 
   use {
     'airblade/vim-gitgutter',
-    branch = 'main'
+    branch = 'main',
   }
 end)
