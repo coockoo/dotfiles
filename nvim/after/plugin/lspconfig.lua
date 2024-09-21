@@ -61,10 +61,7 @@ lspconfig.yamlls.setup({
 
 -- setup efm lsp server
 -- https://github.com/mattn/efm-langserver
-local prettier = {
-  formatCommand = 'prettierd "${INPUT}"',
-  formatStdin = true,
-}
+local prettier = { formatCommand = 'prettierd "${INPUT}"', formatStdin = true }
 local group = vim.api.nvim_create_augroup('lsp_format_on_save', { clear = false })
 lspconfig.efm.setup({
   --- @param client vim.lsp.Client
@@ -84,13 +81,14 @@ lspconfig.efm.setup({
     })
   end,
   init_options = { documentFormatting = true },
-  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'lua' },
+  filetypes = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
   settings = {
     languages = {
       javascript = { prettier },
       javascriptreact = { prettier },
       typescript = { prettier },
       typescriptreact = { prettier },
+      lua = {},
     },
   },
 })
