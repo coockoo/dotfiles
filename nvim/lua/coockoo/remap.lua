@@ -59,3 +59,14 @@ vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, { desc = 'Go to type defi
 
 -- treesitter
 vim.keymap.set('n', '<C-i>', '<cmd>Inspect<CR>', { silent = true, desc = 'inspect treesitter element' })
+
+-- open link
+local opener = require('coockoo.open-link')
+local group = vim.api.nvim_create_augroup('markdown_remaps', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  group = group,
+  callback = function(params)
+    vim.keymap.set('n', 'gx', opener.open_link, { desc = 'Open link', buffer = params.buf })
+  end,
+})
