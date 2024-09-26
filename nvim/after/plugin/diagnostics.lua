@@ -13,7 +13,7 @@ end
 ---@field buf integer
 
 local group = vim.api.nvim_create_augroup('eslint', { clear = true })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufWritePost' }, {
+vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost' }, {
   group = group,
   ---@param args Args
   callback = function(args)
