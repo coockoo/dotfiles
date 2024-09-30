@@ -7,8 +7,8 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="coockoo"
 alias edittheme="$EDITOR ~/.oh-my-zsh/themes/$ZSH_THEME.zsh-theme"
 
-source $ZSH/oh-my-zsh.sh
 zstyle ':omz:update' mode disabled
+source $ZSH/oh-my-zsh.sh
 
 # Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/opt/homebrew/bin/brew shellenv)"
