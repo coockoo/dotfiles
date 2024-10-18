@@ -1,5 +1,10 @@
 local namespace = vim.api.nvim_create_namespace('ns/eslint')
 
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = { text = { error = 'E', warn = 'W', hint = 'H', info = 'I' } },
+})
+
 ---@param value any
 ---@param default_value any
 local function defaults(value, default_value)

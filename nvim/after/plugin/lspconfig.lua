@@ -4,7 +4,7 @@ local lspconfig = require('lspconfig')
 lspconfig.ts_ls.setup({
   filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
   --- @param client vim.lsp.Client
-  on_attach = function(client)
+  on_init = function(client)
     client.server_capabilities.semanticTokensProvider = nil
   end,
 })
@@ -27,7 +27,7 @@ local lua_library = vim.list_extend({ vim.env.VIMRUNTIME }, get_packer_modules()
 lspconfig.lua_ls.setup({
   filetypes = { 'lua' },
   --- @param client vim.lsp.Client
-  on_attach = function(client)
+  on_init = function(client)
     client.server_capabilities.semanticTokensProvider = nil
   end,
   settings = {
@@ -67,7 +67,7 @@ lspconfig.efm.setup({
   --- @param client vim.lsp.Client
   --- @param buffer integer
   on_attach = function(client, buffer)
-    if not client.supports_method('textDocument/formatting') or client.is_stopped() then
+    if client.is_stopped() or not client.supports_method('textDocument/formatting') then
       return
     end
     vim.api.nvim_clear_autocmds({ buffer = buffer, group = group })
@@ -95,16 +95,4 @@ lspconfig.efm.setup({
 
 lspconfig.hls.setup({
   filetypes = { 'haskell', 'cabal' },
-})
-
-vim.diagnostic.config({
-  virtual_text = true,
-  signs = {
-    text = {
-      error = 'E',
-      warn = 'W',
-      hint = 'H',
-      info = 'I',
-    },
-  },
 })
