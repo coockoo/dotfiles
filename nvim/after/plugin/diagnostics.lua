@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost' }, {
 
     local parse_success, parse_res = pcall(vim.json.decode, eslint_res.stdout)
     if not parse_success then
-      return critical_error(parse_res.stdout)
+      return critical_error(eslint_res.stdout)
     end
 
     local diagnostics = {}
