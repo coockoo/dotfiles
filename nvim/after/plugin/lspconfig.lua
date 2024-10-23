@@ -81,14 +81,13 @@ lspconfig.efm.setup({
     })
   end,
   init_options = { documentFormatting = true },
-  filetypes = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
   settings = {
     languages = {
       javascript = { prettier },
       javascriptreact = { prettier },
       typescript = { prettier },
       typescriptreact = { prettier },
-      lua = {},
     },
   },
 })
