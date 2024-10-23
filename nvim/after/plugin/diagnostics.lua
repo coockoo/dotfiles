@@ -31,6 +31,10 @@ vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost' }, {
 
     ---@param message string
     local function critical_error(message)
+      if message:find('Error: Could not find config file.', 1, true) then
+        vim.diagnostic.reset(namespace, bufnr)
+        return
+      end
       vim.diagnostic.set(namespace, bufnr, {
         { lnum = 0, col = 0, severity = vim.diagnostic.severity.ERROR, message = message },
       })
