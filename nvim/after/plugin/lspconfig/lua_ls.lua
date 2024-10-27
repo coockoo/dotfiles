@@ -50,6 +50,7 @@ lspconfig.lua_ls.setup({
         enable = true,
         defaultConfig = {
           -- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/1e04543de6c80afd8e104b6d1fb14f53be12300c/docs/format_config_EN.md
+          call_arg_parentheses = 'keep',
           indent_style = 'space',
           indent_size = '2',
           quote_style = 'single',
