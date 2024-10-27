@@ -10,47 +10,6 @@ lspconfig.ts_ls.setup({
   end,
 })
 
--- setup lua lsp server
--- https://luals.github.io/wiki/settings/
-local function get_packer_modules()
-  local start_path = vim.fs.joinpath(require('packer').config.package_root, 'packer', 'start')
-  local res = {}
-  for file in vim.fs.dir(start_path) do
-    local file_path = vim.fs.joinpath(start_path, file)
-    local luadir = vim.fs.find({ 'lua' }, { path = file_path })
-    if #luadir > 0 then
-      table.insert(res, luadir[1])
-    end
-  end
-  return res
-end
-local lua_library = vim.list_extend({ vim.env.VIMRUNTIME }, get_packer_modules())
-lspconfig.lua_ls.setup({
-  filetypes = { 'lua' },
-  --- @param client vim.lsp.Client
-  on_init = function(client)
-    client.server_capabilities.semanticTokensProvider = nil
-  end,
-  settings = {
-    Lua = {
-      telemetry = { enable = false },
-      format = {
-        enable = true,
-        defaultConfig = {
-          indent_style = 'space',
-          indent_size = '2',
-          quote_style = 'single',
-          trailing_table_separator = 'smart',
-        },
-      },
-      workspace = {
-        checkThirdParty = false,
-        library = lua_library,
-      },
-    },
-  },
-})
-
 -- setup yaml lsp server
 lspconfig.yamlls.setup({
   settings = {
@@ -63,7 +22,7 @@ lspconfig.yamlls.setup({
 -- setup efm lsp server
 -- https://github.com/mattn/efm-langserver
 local prettier = { formatCommand = 'prettierd "${INPUT}"', formatStdin = true }
-local group = vim.api.nvim_create_augroup('lsp_format_on_save', { clear = false })
+local group = vim.api.nvim_create_augroup('lsp_format_on_save_efm', { clear = false })
 lspconfig.efm.setup({
   --- @param client vim.lsp.Client
   --- @param buffer integer
