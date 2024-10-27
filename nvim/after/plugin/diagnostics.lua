@@ -32,41 +32,53 @@ vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost' }, {
     ---@param message string
     local function critical_error(message)
       if message:find('Error: Could not find config file.', 1, true) then
-        vim.diagnostic.reset(namespace, bufnr)
+        vim.schedule(function()
+          vim.diagnostic.reset(namespace, bufnr)
+        end)
         return
       end
-      vim.diagnostic.set(namespace, bufnr, {
-        { lnum = 0, col = 0, severity = vim.diagnostic.severity.ERROR, message = message },
-      })
+      vim.schedule(function()
+        vim.diagnostic.set(namespace, bufnr, {
+          { lnum = 0, col = 0, severity = vim.diagnostic.severity.ERROR, message = message },
+        })
+      end)
     end
 
-    local eslint_success, eslint_res = pcall(function()
-      return vim.system({ 'eslint_d', filename, '--format', 'json' }, {
-        text = true,
-        env = { NODE_NO_WARNINGS = 1 },
-      }):wait()
+    --- @param eslint_res vim.SystemCompleted
+    local function handle_exit(eslint_res)
+      local parse_success, parse_res = pcall(vim.json.decode, eslint_res.stdout)
+      if not parse_success then
+        return critical_error(eslint_res.stdout)
+      end
+
+      local diagnostics = {}
+      for _, message in ipairs(parse_res[1].messages) do
+        table.insert(diagnostics, {
+          lnum = defaults(message.line, 1) - 1,
+          end_num = defaults(message.endLine, 1) - 1,
+          col = defaults(message.column, 1) - 1,
+          end_col = defaults(message.endColumn, 1) - 1,
+          severity = message.severity == 1 and vim.diagnostic.severity.WARN or vim.diagnostic.severity.ERROR,
+          message = message.message,
+          code = defaults(message.ruleId, nil),
+        })
+      end
+
+      vim.schedule(function ()
+        vim.diagnostic.set(namespace, bufnr, diagnostics)
+      end)
+    end
+
+    local eslint_success = pcall(function()
+      vim.system(
+        { 'eslint_d', filename, '--format', 'json' },
+        { text = true, env = { NODE_NO_WARNINGS = 1 } },
+        handle_exit
+      )
     end)
+
     if not eslint_success then
       return critical_error('failed to execute eslint_d')
     end
-
-    local parse_success, parse_res = pcall(vim.json.decode, eslint_res.stdout)
-    if not parse_success then
-      return critical_error(eslint_res.stdout)
-    end
-
-    local diagnostics = {}
-    for _, message in ipairs(parse_res[1].messages) do
-      table.insert(diagnostics, {
-        lnum = defaults(message.line, 1) - 1,
-        end_num = defaults(message.endLine, 1) - 1,
-        col = defaults(message.column, 1) - 1,
-        end_col = defaults(message.endColumn, 1) - 1,
-        severity = message.severity == 1 and vim.diagnostic.severity.WARN or vim.diagnostic.severity.ERROR,
-        message = message.message,
-        code = defaults(message.ruleId, nil),
-      })
-    end
-    vim.diagnostic.set(namespace, bufnr, diagnostics)
   end,
 })
