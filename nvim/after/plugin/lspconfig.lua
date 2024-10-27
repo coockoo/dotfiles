@@ -6,6 +6,7 @@ lspconfig.ts_ls.setup({
   --- @param client vim.lsp.Client
   on_init = function(client)
     client.server_capabilities.semanticTokensProvider = nil
+    client.server_capabilities.documentFormattingProvider = nil
   end,
 })
 
@@ -76,7 +77,7 @@ lspconfig.efm.setup({
       group = group,
       desc = 'Auto format before save',
       callback = function()
-        vim.lsp.buf.format({ bufnr = buffer })
+        vim.lsp.buf.format({ id = client.id, bufnr = buffer })
       end,
     })
   end,

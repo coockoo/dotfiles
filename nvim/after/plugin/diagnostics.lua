@@ -64,7 +64,7 @@ vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost' }, {
         })
       end
 
-      vim.schedule(function ()
+      vim.schedule(function()
         vim.diagnostic.set(namespace, bufnr, diagnostics)
       end)
     end
