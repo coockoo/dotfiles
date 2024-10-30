@@ -24,6 +24,13 @@ alias gt='git'
 alias vim='nvim'
 alias vi='nvim'
 
+# git aliases
+alias gs='git status'
+alias gst='git stash'
+alias gsp='git stash pop'
+alias gcm='git checkout master'
+alias gc='git commit'
+
 # https://github.com/junegunn/fzf
 if type fzf &>/dev/null; then
   export FZF_DEFAULT_OPTS='--reverse'
