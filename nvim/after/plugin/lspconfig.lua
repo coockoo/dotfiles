@@ -41,13 +41,14 @@ lspconfig.efm.setup({
     })
   end,
   init_options = { documentFormatting = true },
-  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'json' },
   settings = {
     languages = {
       javascript = { prettier },
       javascriptreact = { prettier },
       typescript = { prettier },
       typescriptreact = { prettier },
+      json = { prettier },
     },
   },
 })
