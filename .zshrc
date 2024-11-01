@@ -30,6 +30,8 @@ alias gst='git stash'
 alias gsp='git stash pop'
 alias gcm='git checkout master'
 alias gc='git commit'
+alias gd='git diff'
+alias gds='git diff --staged'
 
 # https://github.com/junegunn/fzf
 if type fzf &>/dev/null; then
