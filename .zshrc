@@ -2,16 +2,15 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
 
-export ZSH="$HOME/.oh-my-zsh"
-
-ZSH_THEME="coockoo"
-alias edittheme="$EDITOR ~/.oh-my-zsh/themes/$ZSH_THEME.zsh-theme"
-
-zstyle ':omz:update' mode disabled
-source $ZSH/oh-my-zsh.sh
-
 # Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# setup ohmyzsh (needs to be placed after shellenv)
+export ZSH="$HOME/.oh-my-zsh"
+export ZSH_THEME="coockoo"
+zstyle ':omz:update' mode disabled
+# besides other stuff, this calls compinit
+source $ZSH/oh-my-zsh.sh
 
 alias ag="ag --pager 'less -R'"
 # use bat instead of cat
@@ -66,13 +65,6 @@ setopt HIST_BEEP
 export HISTCONTROL="ignoredups:erasedups"
 # Ignore ls bf bg exit etc... entries in history
 export HISTORY_IGNORE="(ls|[bf]g|exit|z|git status|git s|git diff|git d|git dc|vim|history)"
-
-if type brew &>/dev/null; then
-  fpath=($(brew --prefix)/share/zsh-completions $fpath)
-
-  autoload -Uz compinit
-  compinit
-fi
 
 # Load Glasgow Haskell Compiler
 [ -d "$HOME/.ghcup" ] && path=($HOME/.ghcup/bin $path)
