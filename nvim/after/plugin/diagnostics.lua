@@ -30,8 +30,14 @@ vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost' }, {
     local filename = vim.api.nvim_buf_get_name(bufnr)
 
     ---@param message string
+    local function is_no_eslint(message)
+      return message:find('Error: Could not find config file.', 1, true) or
+      message:find('Error: No ESLint configuration found', 1, true)
+    end
+
+    ---@param message string
     local function critical_error(message)
-      if message:find('Error: Could not find config file.', 1, true) then
+      if is_no_eslint(message) then
         vim.schedule(function()
           vim.diagnostic.reset(namespace, bufnr)
         end)
