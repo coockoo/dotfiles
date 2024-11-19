@@ -18,7 +18,7 @@ end
 ---@field buf integer
 
 local group = vim.api.nvim_create_augroup('eslint', { clear = true })
-vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost' }, {
+vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost', 'TextChanged', 'InsertLeave' }, {
   group = group,
   ---@param args Args
   callback = function(args)
@@ -28,11 +28,12 @@ vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost' }, {
     end
     local bufnr = args.buf
     local filename = vim.api.nvim_buf_get_name(bufnr)
+    local lines = vim.api.nvim_buf_get_lines(bufnr, 0, vim.api.nvim_buf_line_count(bufnr), false)
 
     ---@param message string
     local function is_no_eslint(message)
       return message:find('Error: Could not find config file.', 1, true) or
-      message:find('Error: No ESLint configuration found', 1, true)
+          message:find('Error: No ESLint configuration found', 1, true)
     end
 
     ---@param message string
@@ -77,8 +78,8 @@ vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost' }, {
 
     local eslint_success = pcall(function()
       vim.system(
-        { 'eslint_d', filename, '--format', 'json' },
-        { text = true, env = { NODE_NO_WARNINGS = 1 } },
+        { 'eslint_d', '--stdin', '--stdin-filename', filename, '--format', 'json' },
+        { text = true, env = { NODE_NO_WARNINGS = 1 }, stdin = lines },
         handle_exit
       )
     end)
