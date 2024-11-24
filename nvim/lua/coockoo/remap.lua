@@ -1,3 +1,5 @@
+local git = require('coockoo.git')
+
 -- move lines in visual mode
 vim.keymap.set('v', '<C-j>', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', '<C-k>', ":m '<-2<CR>gv=gv")
@@ -39,6 +41,8 @@ vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true })
 vim.keymap.set('n', '<leader>gco', '<cmd>Git checkout -- %<CR>', { silent = true })
 -- git add
 vim.keymap.set('n', '<leader>ga', '<cmd>Git add %<CR>', { silent = true })
+-- open current line on github
+vim.keymap.set('n', '<leader>gho', git.github_open, { silent = true, desc = 'perform [g]it[h]ub [o]pen' })
 
 -- leave only split
 vim.keymap.set('n', '<leader>o', '<C-w>o')
