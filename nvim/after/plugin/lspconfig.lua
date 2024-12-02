@@ -25,7 +25,12 @@ lspconfig.hls.setup({
 
 lspconfig.marksman.setup({})
 
-lspconfig.zls.setup({})
+lspconfig.zls.setup({
+  on_init = function(client)
+    client.server_capabilities.semanticTokensProvider = nil
+    client.server_capabilities.documentFormattingProvider = nil
+  end,
+})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
