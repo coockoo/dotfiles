@@ -4,9 +4,10 @@ local function status_line()
   local filetype = '%y'
   local right_side = '%='
   local git_info = '%{FugitiveStatusline()}'
+  local col = '%c'
   return string.format(
-    '%s %s %s%s%s',
-    mode, filename, filetype, right_side, git_info
+    '%s %s %s %s %s%s',
+    mode, filename, filetype, col, right_side, git_info
   )
 end
 
