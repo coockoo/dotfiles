@@ -1,0 +1,6 @@
+font-family = Monaco
+font-size = 16
+shell-integration-features = no-cursor
+cursor-style = block
+macos-titlebar-style = tabs
+copy-on-select = clipboard
