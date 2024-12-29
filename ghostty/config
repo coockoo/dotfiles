@@ -1,5 +1,7 @@
 font-family = Monaco
-font-size = 16
+adjust-cell-width = -1
+adjust-cell-height = -1
+font-size = 15.5
 shell-integration-features = no-cursor
 cursor-style = block
 macos-titlebar-style = tabs
