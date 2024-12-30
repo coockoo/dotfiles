@@ -9,9 +9,6 @@ macos-titlebar-style = tabs
 copy-on-select = clipboard
 window-new-tab-position = end
 quit-after-last-window-closed = true
-# TODO: replace this thing with Apple Symbols (for some reason does not work)
-# Or remove this thing once ghostty supports this symbol
-font-codepoint-map = U+2717=Arial Unicode MS
 foreground = ffffff
 
 keybind = cmd+shift+right=move_tab:1
