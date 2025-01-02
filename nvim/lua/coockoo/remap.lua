@@ -58,7 +58,6 @@ vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = 'Show diagnostic' })
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = 'Go to implementation' })
 vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { desc = 'Signature help' })
-vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = 'Go to reference' })
 vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, { desc = 'Go to type definition' })
 
 -- treesitter
