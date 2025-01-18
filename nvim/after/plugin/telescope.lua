@@ -1,3 +1,4 @@
+local telescope = require('telescope')
 local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 
@@ -9,11 +10,21 @@ vim.keymap.set('n', '<leader>r', builtin.resume, { desc = 'telescope: [r]esume' 
 vim.keymap.set('n', 'gr', builtin.lsp_references, { desc = 'telescope: [g]o to [r]eferences' })
 vim.keymap.set('n', 'gd', builtin.lsp_definitions, { desc = 'telescope: [g]o to [d]definitions' })
 
-require('telescope').setup({
+telescope.setup({
   defaults = {
     mappings = {
       i = {
         ['<Esc>'] = actions.close,
+        ['<C-j>'] = {
+          actions.move_selection_next,
+          type = 'action',
+          opts = { nowait = true, silent = true },
+        },
+        ['<C-k>'] = {
+          actions.move_selection_previous,
+          type = 'action',
+          opts = { nowait = true, silent = true },
+        },
       },
     },
     layout_config = {
