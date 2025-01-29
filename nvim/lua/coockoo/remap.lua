@@ -19,8 +19,7 @@ vim.keymap.set('n', '<leader>y', '"+y')
 vim.keymap.set('v', '<leader>y', '"+y')
 vim.keymap.set('n', '<leader>Y', '"+Y')
 
--- yank a file into system clipboard
-vim.keymap.set('n', '<leader>yf', 'mzggVG"+y`z', { desc = 'yank a file into system clipboard' })
+vim.keymap.set('n', '<leader>yf', 'mzggVG"+y`z', { desc = '[y]ank a [f]ile into system clipboard' })
 
 -- delete into black hole
 vim.keymap.set('n', '<leader>d', '"_d', { desc = 'delete into black hole' })
@@ -31,11 +30,19 @@ vim.keymap.set('n', 'Q', '<nop>')
 vim.keymap.set('n', 'q:', '<nop>')
 
 -- in normal mode while on word, replace it in file via %s
-vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = 'replace word under cursor' })
+vim.keymap.set(
+  'n',
+  '<leader>s',
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = 'replace word under cursor' }
+)
 
--- make file executable (chmod +x)
-vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true })
+vim.keymap.set(
+  'n',
+  '<leader>x',
+  '<cmd>!test -x % && chmod -x % || chmod +x %<CR><CR>',
+  { silent = true, desc = 'toggle file e[x]ecutable (chmod +/-x)' }
+)
 
 -- git checkout current changes in current file
 vim.keymap.set('n', '<leader>gco', '<cmd>Git checkout -- %<CR>', { silent = true })
