@@ -79,3 +79,5 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set('n', 'gx', opener.open_link, { desc = 'Open link', buffer = params.buf })
   end,
 })
+
+-- todo: add remap for opening README.md file
