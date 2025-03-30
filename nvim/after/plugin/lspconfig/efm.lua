@@ -13,7 +13,7 @@ lspconfig.efm.setup({
   --- @param client vim.lsp.Client
   --- @param buffer integer
   on_attach = function(client, buffer)
-    if client.is_stopped() or not client.supports_method('textDocument/formatting') then
+    if client:is_stopped() or not client:supports_method('textDocument/formatting', buffer) then
       return
     end
     vim.api.nvim_clear_autocmds({ buffer = buffer, group = group })
