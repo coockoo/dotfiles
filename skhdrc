@@ -1,3 +1,6 @@
 cmd + alt - j : open -a "Google Chrome"
 cmd + alt - k : open -a "ghostty"
 cmd + alt - l : open -a "Slack"
+cmd + alt - f : window_manager full-screen
+cmd + alt - w : window_manager split-west
+cmd + alt - e : window_manager split-east
