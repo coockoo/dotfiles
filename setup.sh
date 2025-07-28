@@ -11,3 +11,5 @@ fnm install --lts
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+# disable langauge indicator popup on MacOS https://stackoverflow.com/a/77614907
+defaults write kCFPreferencesAnyApplication TSMLanguageIndicatorEnabled 0
