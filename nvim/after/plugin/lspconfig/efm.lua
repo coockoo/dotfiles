@@ -8,6 +8,20 @@ end
 -- https://github.com/mattn/efm-langserver
 
 local prettier = { formatCommand = 'prettierd "${INPUT}"', formatStdin = true }
+local swiftFormat = { formatCommand = 'swift-format -', formatStdin = true }
+
+local languages = {
+  javascript = { prettier },
+  javascriptreact = { prettier },
+  typescript = { prettier },
+  typescriptreact = { prettier },
+  scss = { prettier },
+  css = { prettier },
+  json = { prettier },
+  html = { prettier },
+  swift = { swiftFormat },
+}
+
 local group = vim.api.nvim_create_augroup('lsp_format_on_save_efm', { clear = false })
 lspconfig.efm.setup({
   --- @param client vim.lsp.Client
@@ -27,17 +41,8 @@ lspconfig.efm.setup({
     })
   end,
   init_options = { documentFormatting = true },
-  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'css', 'scss', 'json', 'html' },
+  filetypes = vim.tbl_keys(languages),
   settings = {
-    languages = {
-      javascript = { prettier },
-      javascriptreact = { prettier },
-      typescript = { prettier },
-      typescriptreact = { prettier },
-      scss = { prettier },
-      css = { prettier },
-      json = { prettier },
-      html = { prettier },
-    },
+    languages = languages,
   },
 })
