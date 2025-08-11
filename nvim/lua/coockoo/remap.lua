@@ -65,6 +65,16 @@ vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = 'Show diagnostic' 
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = 'Go to implementation' })
 vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { desc = 'Signature help' })
 vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, { desc = 'Go to type definition' })
+vim.keymap.set(
+  'n', 'gn',
+  function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end,
+  { desc = '[g]o to [n]ext diagnostic error' }
+)
+vim.keymap.set(
+  'n', 'gN',
+  function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end,
+  { desc = '[g]o to [n]ext diagnostic error' }
+)
 
 -- treesitter
 vim.keymap.set('n', '<C-i>', '<cmd>Inspect<CR>', { silent = true, desc = 'inspect treesitter element' })
