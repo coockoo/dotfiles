@@ -67,12 +67,12 @@ vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { desc = 'Signature help' 
 vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, { desc = 'Go to type definition' })
 vim.keymap.set(
   'n', 'gn',
-  function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end,
+  function() vim.diagnostic.jump({ severity = vim.diagnostic.severity.ERROR, count = 1 }) end,
   { desc = '[g]o to [n]ext diagnostic error' }
 )
 vim.keymap.set(
   'n', 'gN',
-  function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end,
+  function() vim.diagnostic.jump({ severity = vim.diagnostic.severity.ERROR, count = -1 }) end,
   { desc = '[g]o to [n]ext diagnostic error' }
 )
 
@@ -89,5 +89,9 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set('n', 'gx', opener.open_link, { desc = 'Open link', buffer = params.buf })
   end,
 })
+
+-- copilot
+vim.keymap.set('n', '<leader>ce', '<cmd>Copilot enable<CR>', { desc = '[c]opilot [e]nable' })
+vim.keymap.set('n', '<leader>cd', '<cmd>Copilot disable<CR>', { desc = '[c]opilot [d]isable' })
 
 -- todo: add remap for opening README.md file
