@@ -8,7 +8,7 @@ return require('packer').startup(function(use)
     requires = { { 'nvim-lua/plenary.nvim' } },
   }
   use {
-    'nvim-treesitter/nvim-treesitter', branch = 'main',
+    'nvim-treesitter/nvim-treesitter', branch = 'master', -- i'd gladly migrate to main, but it is broken
     run = ':TSUpdate',
   }
   use 'mbbill/undotree'
