@@ -1,5 +1,3 @@
-local ts_utils = require('nvim-treesitter.ts_utils')
-
 ---@params node TSNode
 local function handle_link_destination(node)
   local buffer = vim.api.nvim_get_current_buf()
@@ -19,6 +17,9 @@ local function handle_link_label(node)
   )
 
   local tree = vim.treesitter.get_parser():parse()
+  if not tree or #tree == 0 then
+    return
+  end
   local root = tree[1]:root()
 
   for _, match, _ in query:iter_matches(root, 0) do
@@ -64,7 +65,7 @@ end
 
 
 local function open_link()
-  local node = ts_utils.get_node_at_cursor()
+  local node = vim.treesitter.get_node()
   if not node then
     return
   end
