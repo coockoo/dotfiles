@@ -43,33 +43,3 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 lspconfig.cssls.setup({
   capabilities = capabilities,
 })
-
--- TODO: add this thing
-local function handleLspProgress(ev)
-  -- debug info
-  -- vim.print('progress', vim.inspect(ev))
-
-  -- https://github.com/microsoft/language-server-protocol/issues/786
-  --[[
-  --{
-  buf = 8,
-  data = {
-    client_id = 1,
-    params = {
-      token = 3,
-      value = {
-        kind = "report",
-        message = "1008/1033",
-        percentage = 97,
-        title = "Loading workspace"
-      }
-    }
-  },
-  event = "LspProgress",
-  file = "report",
-  id = 51,
-  match = "/Users/coockoo/dev/coockoo/dotfiles/report"
-}
-  ]] --
-end
--- vim.api.nvim_create_autocmd('LspProgress', { callback = handleLspProgress })
