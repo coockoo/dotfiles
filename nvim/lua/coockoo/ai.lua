@@ -21,14 +21,26 @@ local function prompt(input)
   return text
 end
 
-local function doStuff()
-  local mode = vim.api.nvim_get_mode().mode
-  if mode == 'normal' then
-    vim.notify('Please run this command in normal mode.', vim.log.levels.WARN)
-    return
+local function get_visual_selected_text()
+  local start_pos = vim.fn.getpos('v')
+  local end_pos = vim.fn.getpos('.')
+  if start_pos[2] > end_pos[2] or (start_pos[2] == end_pos[2] and start_pos[3] > end_pos[3]) then
+    start_pos, end_pos = end_pos, start_pos
   end
+  return table.concat(
+    vim.api.nvim_buf_get_text(0, start_pos[2] - 1, start_pos[3] - 1, end_pos[2] - 1, end_pos[3], {}),
+    '\n'
+  )
+end
+
+local function run_ai()
+  local input = get_visual_selected_text()
+  local output = vim.fn.split(prompt(input), '\n')
+  vim.api.nvim_input('<Esc>')
+  vim.api.nvim_put(output, 'l', true, true)
 end
 
 return {
   prompt = prompt,
+  run_ai = run_ai,
 }

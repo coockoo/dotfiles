@@ -94,4 +94,7 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.keymap.set('n', '<leader>ce', '<cmd>Copilot enable<CR>', { desc = '[c]opilot [e]nable' })
 vim.keymap.set('n', '<leader>cd', '<cmd>Copilot disable<CR>', { desc = '[c]opilot [d]isable' })
 
+local ai = require('coockoo.ai')
+vim.keymap.set('v', '<leader>j', ai.run_ai, { desc = 'get ai completion from selection' })
+
 -- todo: add remap for opening README.md file
