@@ -14,7 +14,7 @@ local function handle_lsp_progress(ev)
     return
   end
   if params.value.kind == 'end' then
-    statuses[client_id] = client.name .. ': done'
+    statuses[client_id] = ''
     return
   end
   if params.value.kind == 'report' then
