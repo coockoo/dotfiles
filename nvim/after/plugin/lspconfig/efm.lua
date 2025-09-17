@@ -19,6 +19,7 @@ local languages = {
   css = { prettier },
   json = { prettier },
   html = { prettier },
+  markdown = { prettier },
   swift = { swiftFormat },
 }
 
