@@ -9,6 +9,7 @@ end
 
 local prettier = { formatCommand = 'prettierd "${INPUT}"', formatStdin = true }
 local swiftFormat = { formatCommand = 'swift-format -', formatStdin = true }
+local ruffFormat = { formatCommand = 'ruff format -', formatStdin = true }
 
 local languages = {
   javascript = { prettier },
@@ -21,6 +22,7 @@ local languages = {
   html = { prettier },
   markdown = { prettier },
   swift = { swiftFormat },
+  python = { ruffFormat },
 }
 
 local group = vim.api.nvim_create_augroup('lsp_format_on_save_efm', { clear = false })

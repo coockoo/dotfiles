@@ -43,3 +43,14 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 lspconfig.cssls.setup({
   capabilities = capabilities,
 })
+
+lspconfig.pylsp.setup({
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = { enabled = false },
+        ruff = { enabled = true },
+      },
+    },
+  },
+})

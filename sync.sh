@@ -6,6 +6,9 @@ mkdir -p $HOME/.config/skhd
 rm -f $HOME/.config/skhd/skhdrc && ln skhdrc $HOME/.config/skhd/skhdrc
 # ripgrep
 rm -f $HOME/.config/ripgreprc && ln ripgreprc $HOME/.config/ripgreprc
+# ruff
+mkdir -p $HOME/.config/ruff
+rm -f $HOME/.config/ruff/ruff.toml && ln ruff/ruff.toml $HOME/.config/ruff/ruff.toml
 # zshrc
 rm -f $HOME/.zshrc && ln .zshrc $HOME/.zshrc
 
