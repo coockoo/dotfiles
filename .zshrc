@@ -82,6 +82,7 @@ __git_files () {
 if type pyenv &>/dev/null; then
   eval "$(pyenv init -)"
 fi
+[ -d "$HOME/.local/bin" ] && path=($HOME/.local/bin $path)
 
 # add user-specific binaries
 [ ! -d "$HOME/.bin" ] && mkdir "$HOME/.bin"

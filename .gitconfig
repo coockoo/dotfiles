@@ -39,3 +39,5 @@
   defaultBranch = master
 [advice]
   skippedCherryPicks = false
+[user]
+	name = coockoo
