@@ -50,5 +50,5 @@ return require('packer').startup(function(use)
     branch = 'main',
   }
 
-  use 'github/copilot.vim'
+  -- use 'github/copilot.vim'
 end)
