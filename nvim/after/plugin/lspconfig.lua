@@ -1,7 +1,5 @@
-local lspconfig = require('lspconfig')
-
 -- setup typescript lsp server
-lspconfig.ts_ls.setup({
+vim.lsp.config('ts_ls', {
   filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
   --- @param client vim.lsp.Client
   on_init = function(client)
@@ -11,7 +9,7 @@ lspconfig.ts_ls.setup({
 })
 
 -- setup yaml lsp server
-lspconfig.yamlls.setup({
+vim.lsp.config('yamlls', {
   settings = {
     yaml = {
       keyOrdering = false,
@@ -19,19 +17,19 @@ lspconfig.yamlls.setup({
   },
 })
 
-lspconfig.hls.setup({
+vim.lsp.config('hls', {
   filetypes = { 'haskell', 'cabal' },
 })
 
-lspconfig.marksman.setup({})
+vim.lsp.config('marksman', {})
 
 local htmlCap = vim.lsp.protocol.make_client_capabilities()
 htmlCap.textDocument.completion.completionItem.snippetSupport = true
-lspconfig.html.setup({
+vim.lsp.config('html', {
   capabilities = htmlCap,
 })
 
-lspconfig.zls.setup({
+vim.lsp.config('zls', {
   on_init = function(client)
     client.server_capabilities.semanticTokensProvider = nil
     client.server_capabilities.documentFormattingProvider = nil
@@ -40,11 +38,11 @@ lspconfig.zls.setup({
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-lspconfig.cssls.setup({
+vim.lsp.config('cssls', {
   capabilities = capabilities,
 })
 
-lspconfig.pylsp.setup({
+vim.lsp.config('pylsp', {
   settings = {
     pylsp = {
       plugins = {
@@ -54,3 +52,4 @@ lspconfig.pylsp.setup({
     },
   },
 })
+vim.lsp.enable({ 'ts_ls', 'yamlls', 'hls', 'marksman', 'html', 'zls', 'cssls', 'pylsp' })

@@ -1,9 +1,3 @@
-local success, lspconfig = pcall(require, 'lspconfig')
-if not success then
-  vim.notify('lspconfig/lua_ls: cannot require lspconfig', vim.log.levels.ERROR)
-  return
-end
-
 -- setup lua lsp server
 -- https://luals.github.io/wiki/settings/
 
@@ -24,7 +18,7 @@ end
 local lua_library = vim.list_extend({ vim.env.VIMRUNTIME }, get_packer_modules())
 
 local group = vim.api.nvim_create_augroup('lsp_format_on_save_lua_ls', { clear = false })
-lspconfig.lua_ls.setup({
+vim.lsp.config('lua_ls', {
   filetypes = { 'lua' },
   --- @param client vim.lsp.Client
   on_init = function(client)
@@ -66,3 +60,4 @@ lspconfig.lua_ls.setup({
     },
   },
 })
+vim.lsp.enable('lua_ls')

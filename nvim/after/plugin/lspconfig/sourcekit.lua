@@ -1,10 +1,4 @@
-local success, lspconfig = pcall(require, 'lspconfig')
-if not success then
-  vim.notify('lspconfig/sourcekit: cannot require lspconfig', vim.log.levels.ERROR)
-  return
-end
-
-lspconfig.sourcekit.setup({
+vim.lsp.config('sourcekit', {
   capabilities = {
     workspace = {
       didChangeWatchedFiles = {
@@ -13,3 +7,4 @@ lspconfig.sourcekit.setup({
     },
   },
 })
+vim.lsp.enable('sourcekit')

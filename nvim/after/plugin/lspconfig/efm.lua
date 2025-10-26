@@ -1,9 +1,3 @@
-local success, lspconfig = pcall(require, 'lspconfig')
-if not success then
-  vim.notify('lspconfig/efm: cannot require lspconfig', vim.log.levels.ERROR)
-  return
-end
-
 -- setup efm lsp server
 -- https://github.com/mattn/efm-langserver
 
@@ -26,7 +20,7 @@ local languages = {
 }
 
 local group = vim.api.nvim_create_augroup('lsp_format_on_save_efm', { clear = false })
-lspconfig.efm.setup({
+vim.lsp.config('efm', {
   --- @param client vim.lsp.Client
   --- @param buffer integer
   on_attach = function(client, buffer)
@@ -49,3 +43,4 @@ lspconfig.efm.setup({
     languages = languages,
   },
 })
+vim.lsp.enable('efm')
