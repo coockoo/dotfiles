@@ -15,7 +15,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     // left thumb MO
     [1] = LAYOUT_split_3x6_3_ex2(
-        KC_GRV,  KC_1,  KC_2,  KC_3,  KC_4,    KC_5,    LAG(KC_W), /**/ KC_NO,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
+        KC_GRV,  KC_1,  KC_2,  KC_3,  KC_4,    KC_5,    LAG(KC_W), /**/ KC_NO,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    LALT(KC_BSPC),
         KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,   LAG(KC_E), /**/ KC_NO,  KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, KC_NO,
         KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,              /**/         KC_NO,   KC_NO,   KC_COMM, KC_DOT,  KC_NO,   KC_RSFT,
                                       KC_LGUI, KC_TRNS, KC_SPC,    /**/ KC_ENT, MO(3),   KC_LCTL
