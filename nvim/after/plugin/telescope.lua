@@ -9,6 +9,7 @@ vim.keymap.set('n', '<C-g>', builtin.live_grep, { desc = 'telescope: live [g]rep
 vim.keymap.set('n', '<leader>r', builtin.resume, { desc = 'telescope: [r]esume' })
 vim.keymap.set('n', 'gr', builtin.lsp_references, { desc = 'telescope: [g]o to [r]eferences' })
 vim.keymap.set('n', 'gd', builtin.lsp_definitions, { desc = 'telescope: [g]o to [d]definitions' })
+vim.keymap.set('n', 'gi', builtin.lsp_implementations, { desc = 'telescope: [g]o to [i]mplementations' })
 
 telescope.setup({
   defaults = {
