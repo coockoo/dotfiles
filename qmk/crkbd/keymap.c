@@ -29,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   // both thumbs MO
   [3] = LAYOUT_split_3x6_3_ex2(
-    QK_BOOT, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,   KC_BRIU, /**/ KC_VOLU, KC_NO,          KC_NO, KC_NO,  KC_NO,       KC_NO,         QK_RBT,
+    QK_BOOT, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,   KC_BRIU, /**/ KC_VOLU, KC_NO,          LAG(KC_J),     LAG(KC_K),   LAG(KC_L),     KC_NO, KC_NO,
     RM_TOGG, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,   KC_BRID, /**/ KC_VOLD, LALT(KC_LEFT),  LALT(KC_DOWN), LALT(KC_UP), LALT(KC_RGHT), KC_NO, KC_NO,
     RM_NEXT, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,            /**/          KC_NO,          KC_NO,         KC_NO,       KC_NO,         KC_NO, RM_PREV,
                                   KC_LGUI, KC_TRNS, KC_SPC,  /**/ KC_ENT,  KC_TRNS,        KC_NO
