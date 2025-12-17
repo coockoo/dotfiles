@@ -41,3 +41,5 @@
   skippedCherryPicks = false
 [user]
 	name = coockoo
+[url "git@github.com:"]
+	insteadof = https://github.com/
