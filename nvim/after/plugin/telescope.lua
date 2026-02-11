@@ -44,5 +44,8 @@ telescope.setup({
       use_git_root = false,
       show_untracked = true,
     },
+    buffers = {
+      sort_mru = true,
+    },
   },
 })
