@@ -50,6 +50,8 @@ vim.keymap.set('n', '<leader>gco', '<cmd>Git checkout -- %<CR>', { silent = true
 vim.keymap.set('n', '<leader>ga', '<cmd>Git add %<CR>', { silent = true })
 -- open current line on github
 vim.keymap.set('n', '<leader>gho', git.github_open, { silent = true, desc = 'perform [g]it[h]ub [o]pen' })
+-- show git blame
+vim.keymap.set('n', '<leader>gb', '<cmd>Git blame<CR>', { silent = true, desc = 'show [g]it [b]lame' })
 
 -- leave only split
 vim.keymap.set('n', '<leader>o', '<C-w>o')
@@ -89,11 +91,9 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- copilot
-vim.keymap.set('n', '<leader>ce', '<cmd>Copilot enable<CR>', { desc = '[c]opilot [e]nable' })
-vim.keymap.set('n', '<leader>cd', '<cmd>Copilot disable<CR>', { desc = '[c]opilot [d]isable' })
-
 local ai = require('coockoo.ai')
 vim.keymap.set('v', '<leader>j', ai.run_ai, { desc = 'get ai completion from selection' })
+
+vim.keymap.set('n', '<leader>mm', '<cmd>messages<CR>', { desc = 'toggle messages', silent = true })
 
 -- todo: add remap for opening README.md file
