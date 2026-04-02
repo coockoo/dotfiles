@@ -37,3 +37,7 @@ vim.opt.encoding = 'utf-8'
 
 vim.opt.showmode = false
 vim.opt.mousemodel = 'extend'
+
+-- disables these things in the edited files (not used anywhere)
+-- // vim: tabstop=4 shiftwidth=4 expandtab
+vim.opt.modeline = false
