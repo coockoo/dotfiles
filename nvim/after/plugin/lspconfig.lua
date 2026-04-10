@@ -6,6 +6,18 @@ vim.lsp.config('ts_ls', {
     client.server_capabilities.semanticTokensProvider = nil
     client.server_capabilities.documentFormattingProvider = nil
   end,
+  settings = {
+    typescript = {
+      preferences = {
+        preferTypeOnlyAutoImports = true,
+      },
+    },
+    javascript = {
+      preferences = {
+        preferTypeOnlyAutoImports = true,
+      },
+    },
+  },
 })
 
 -- setup yaml lsp server

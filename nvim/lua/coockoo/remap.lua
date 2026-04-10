@@ -52,6 +52,8 @@ vim.keymap.set('n', '<leader>ga', '<cmd>Git add %<CR>', { silent = true })
 vim.keymap.set('n', '<leader>gho', git.github_open, { silent = true, desc = 'perform [g]it[h]ub [o]pen' })
 -- show git blame
 vim.keymap.set('n', '<leader>gb', '<cmd>Git blame<CR>', { silent = true, desc = 'show [g]it [b]lame' })
+-- next hunk
+vim.keymap.set('n', '<leader>hn', '<Plug>(GitGutterNextHunk)', { silent = true, desc = '[h]unk: [n]ext' })
 
 -- leave only split
 vim.keymap.set('n', '<leader>o', '<C-w>o')
