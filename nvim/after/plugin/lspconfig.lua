@@ -1,6 +1,16 @@
+local util = require('lspconfig.util')
+
 -- setup typescript lsp server
 vim.lsp.config('ts_ls', {
   filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+  root_dir = function(bufnr, on_dir)
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    local root = (
+      util.root_pattern('tsconfig.json', 'jsconfig.json')(fname) or
+      util.root_pattern('package.json', '.git')(fname)
+    )
+    on_dir(root)
+  end,
   --- @param client vim.lsp.Client
   on_init = function(client)
     client.server_capabilities.semanticTokensProvider = nil

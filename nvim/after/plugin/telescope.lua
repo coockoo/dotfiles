@@ -30,10 +30,10 @@ telescope.setup({
     },
     layout_config = {
       horizontal = {
-        height = 0.6,
+        height = 0.7,
         preview_cutoff = 120,
         prompt_position = 'top',
-        width = 0.8,
+        width = 0.9,
       },
     },
     sorting_strategy = 'ascending',

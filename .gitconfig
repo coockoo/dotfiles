@@ -18,6 +18,7 @@
   statsu = status
   comit = commit
   commmit = commit
+  cocmit = commit
 
   # shortcuts
   b = branch
