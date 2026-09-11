@@ -1,9 +1,9 @@
-require("neo-tree").setup {
+require('neo-tree').setup {
   close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
   window = {
     position = 'float',
     mappings = {
-      ["<Esc>"] = "close_window",
+      ['<Esc>'] = 'close_window',
     },
   },
   filesystem = {
@@ -19,6 +19,7 @@ require("neo-tree").setup {
       padding = 0,
     },
     icon = {
+      default = ' ',
       folder_closed = '+',
       folder_open = '-',
       folder_empty = ' ',
@@ -31,8 +32,8 @@ require("neo-tree").setup {
         staged = '',
         conflict = '?!',
       },
-    }
-  }
+    },
+  },
 }
 -- open netrw
-vim.keymap.set("n", "<leader>t", function() vim.cmd('Neotree reveal') end)
+vim.keymap.set('n', '<leader>t', function() vim.cmd('Neotree reveal') end)
